@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    chart: metrics-server
-    repoURL: https://github.com/IanHewlett/nano-platform-service-metrics-server/charts/metrics-server
-    targetRevision: 0.0.1
+    repoURL: https://github.com/IanHewlett/nano-platform-service-metrics-server.git
+    path: charts/metrics-server
+    targetRevision: main
     helm:
       releaseName: metrics-server
       valueFiles:
