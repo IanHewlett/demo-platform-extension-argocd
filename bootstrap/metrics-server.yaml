@@ -1,18 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: metrics-server
+  name: metrics-server-root
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/IanHewlett/nano-platform-service-metrics-server.git
-    path: charts/metrics-server
+    path: release
     targetRevision: main
-    helm:
-      releaseName: metrics-server
-      valueFiles:
-        - values-local.yaml
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kube-system
