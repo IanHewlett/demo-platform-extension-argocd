@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: https://github.com/IanHewlett/nano-platform-service-metrics-server.git
     path: release
-    targetRevision: main
+    targetRevision: 0.0.13
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
