@@ -21,3 +21,7 @@ minikube:
 
 bootstrap-argocd:
   kubectl apply -k bootstrap/argo-cd
+
+bootstrap-argocd-2:
+  kubectl apply -f bootstrap/argo-cd.yaml
+  kubectl apply -f bootstrap/root.yaml
