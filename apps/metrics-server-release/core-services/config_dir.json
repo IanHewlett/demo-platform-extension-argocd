@@ -1,0 +1,13 @@
+{
+  "appName": "metrics-server-release",
+  "userGivenName": "metrics-server-release",
+  "destNamespace": "default",
+  "destServer": "https://kubernetes.default.svc",
+  "srcPath": "release/",
+  "srcRepoURL": "https://github.com/IanHewlett/nano-platform-service-metrics-server.git",
+  "srcTargetRevision": "",
+  "labels": null,
+  "annotations": null,
+  "exclude": "",
+  "include": ""
+}
