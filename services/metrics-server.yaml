@@ -1,36 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: metrics-server
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app.kubernetes.io/managed-by: argocd-autopilot
+    app.kubernetes.io/name: metrics-server-release
+  name: metrics-server-release
   namespace: argocd
 spec:
   project: default
   source:
-    chart: metrics-server
-    repoURL: https://kubernetes-sigs.github.io/metrics-server
-    targetRevision: 3.12.0
-    helm:
-      releaseName: metrics-server
-      valuesObject:
-        args:
-          - --kubelet-insecure-tls
-        resources:
-          requests:
-            cpu: 10m
-            memory: 50Mi
-          limits:
-            cpu: 100m
-            memory: 200Mi
-        nodeSelector:
-          nodegroup: "management-nodes"
-        tolerations:
-          - key: "dedicated"
-            operator: "Equal"
-            value: "management"
-            effect: "NoSchedule"
+    repoURL: https://github.com/IanHewlett/nano-platform-service-metrics-server.git
+    path: release
+    targetRevision: main
   destination:
-    server: "https://kubernetes.default.svc"
-    namespace: kube-system
+    server: https://kubernetes.default.svc
+    namespace: argocd
   syncPolicy:
     automated:
       selfHeal: true
