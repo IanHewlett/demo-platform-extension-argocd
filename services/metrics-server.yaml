@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
+  name: metrics-server-release
+  namespace: argocd
   labels:
     app.kubernetes.io/managed-by: argocd-autopilot
     app.kubernetes.io/name: metrics-server-release
-  name: metrics-server-release
-  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
