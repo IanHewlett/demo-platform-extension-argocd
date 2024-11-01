@@ -4,6 +4,18 @@ namespace: argocd
 resources:
   - github.com/argoproj-labs/argocd-autopilot/manifests/base?ref=v0.4.17
   - argocd-ns.yaml
+configMapGenerator:
+  - behavior: merge
+    literals:
+      - |
+        repository.credentials=- passwordSecret:
+            key: git_token
+            name: autopilot-secret
+          url: https://github.com/
+          usernameSecret:
+            key: git_username
+            name: autopilot-secret
+    name: argocd-cm
 patches:
   - target:
       kind: Deployment
