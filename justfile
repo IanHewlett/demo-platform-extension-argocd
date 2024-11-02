@@ -10,8 +10,8 @@ demo:
   just argocd
 
 clean:
-  minikube stop
-  minikube delete
+  minikube stop || true
+  minikube delete || true
   podman machine stop {{podman_machine}}
   podman machine rm {{podman_machine}}
 
