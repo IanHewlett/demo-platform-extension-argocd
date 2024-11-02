@@ -7,12 +7,13 @@ _default:
 demo:
   just podman
   just minikube
-  just bootstrap-argocd
+  just argocd
 
 clean:
-  minikube stop && minikube delete
-  # podman machine stop {{podman_machine}}
-  # podman machine rm {{podman_machine}}
+  minikube stop
+  minikube delete
+  podman machine stop {{podman_machine}}
+  podman machine rm {{podman_machine}}
 
 # initialize podman-machine if it does not exist, and then start the podman-machine if it is not running
 @podman user="ianhewlett":
@@ -29,7 +30,7 @@ minikube:
     kubectl label nodes minikube "nodegroup"="management-nodes"
     kubectl label nodes minikube "node.kubernetes.io/role"="management"
 
-bootstrap-argocd:
+argocd:
   kubectl apply -k bootstrap/argocd
   kubectl apply -f sync_secret.yaml #TODO local file to create secret with github user/secret(pat)
   kubectl apply -k bootstrap
