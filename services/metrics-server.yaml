@@ -9,6 +9,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
+  project: default
   source:
     repoURL: https://github.com/IanHewlett/demo-platform-service-metrics-server.git
     path: overlays/local
