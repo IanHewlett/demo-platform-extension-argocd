@@ -31,5 +31,5 @@ minikube:
 
 bootstrap-argocd:
   kubectl apply -k bootstrap/argocd
-  kubectl apply -f sync_secret.yaml
+  kubectl apply -f sync_secret.yaml #TODO local file to create secret with github user/secret(pat)
   kubectl apply -k bootstrap
