@@ -6,13 +6,13 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
   labels:
     app.kubernetes.io/managed-by: argocd-autopilot
-    app.kubernetes.io/name: argo-cd
+    app.kubernetes.io/name: argocd
   name: argo-cd
   namespace: argocd
 spec:
   project: default
   source:
-    path: bootstrap/argo-cd
+    path: bootstrap/argocd
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
   destination:
     namespace: argocd

@@ -4,6 +4,16 @@ podman_machine := "demo-machine"
 _default:
   @just --list
 
+demo:
+  just podman
+  just minikube
+  just bootstrap-argocd
+
+clean:
+  minikube stop && minikube delete
+  # podman machine stop {{podman_machine}}
+  # podman machine rm {{podman_machine}}
+
 # initialize podman-machine if it does not exist, and then start the podman-machine if it is not running
 @podman user="ianhewlett":
   (podman machine ls | grep -q {{podman_machine}} && [[ $? -eq 0 ]] && echo "podman machine exists") \
@@ -20,7 +30,6 @@ minikube:
     kubectl label nodes minikube "node.kubernetes.io/role"="management"
 
 bootstrap-argocd:
-  kubectl apply -k bootstrap/argo-cd
+  kubectl apply -k bootstrap/argocd
   kubectl apply -f sync_secret.yaml
-  kubectl apply -f bootstrap/argo-cd.yaml
-  kubectl apply -f bootstrap/services.yaml
+  kubectl apply -k bootstrap
