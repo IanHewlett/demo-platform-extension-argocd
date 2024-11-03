@@ -1,5 +1,6 @@
 #!/usr/bin/env just --justfile
 podman_machine := "demo-machine"
+podman_mount_path := "/Users/ianhewlett:/Users/ianhewlett"
 
 _default:
   @just --list
@@ -16,9 +17,9 @@ clean:
   podman machine rm {{podman_machine}} --force
 
 # initialize podman-machine if it does not exist, and then start the podman-machine if it is not running
-@podman user="ianhewlett":
+@podman:
   (podman machine ls | grep -q {{podman_machine}} && [[ $? -eq 0 ]] && echo "podman machine exists") \
-    || (echo "initializing podman machine" && podman machine init --cpus 6 --memory 10048 --disk-size 20 --rootful -v /Users/{{user}}:/Users/{{user}} {{podman_machine}})
+    || (echo "initializing podman machine" && podman machine init --cpus 6 --memory 10048 --disk-size 20 --rootful -v {{podman_mount_path}} {{podman_machine}})
   (podman machine inspect {{podman_machine}} | grep -q '"State": "running"' && [[ $? -eq 0 ]] && echo "podman machine running") \
       || (echo "starting podman machine" && podman machine start {{podman_machine}})
 
