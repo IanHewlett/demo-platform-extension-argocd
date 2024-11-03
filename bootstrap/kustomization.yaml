@@ -6,3 +6,4 @@ resources:
   - argocd.yaml
   - namespaces.yaml
   - services.yaml
+  - applications.yaml
