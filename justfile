@@ -13,7 +13,7 @@ clean:
   minikube stop || true
   minikube delete || true
   podman machine stop {{podman_machine}}
-  podman machine rm {{podman_machine}}
+  podman machine rm {{podman_machine}} --force
 
 # initialize podman-machine if it does not exist, and then start the podman-machine if it is not running
 @podman user="ianhewlett":
@@ -32,5 +32,31 @@ minikube:
 
 argocd:
   kubectl apply -k bootstrap/argocd
-  kubectl apply -f sync_secret.yaml #TODO local file to create secret with github user/secret(pat)
+  just _secret
+  just _check
   kubectl apply -k bootstrap
+  just _wait
+
+@_secret:
+  kubectl create secret generic autopilot-secret -n argocd \
+    --from-literal=git_username=username \
+    --from-literal=git_token="$GITHUB_TOKEN" \
+    --dry-run=client -o yaml | kubectl apply -f -
+
+@_check:
+  while [[ $(kubectl get pods -n argocd -l 'app.kubernetes.io/name=argocd-applicationset-controller' -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; \
+   do echo "waiting for argocd-applicationset-controller pod" && sleep 1; done
+  while [[ $(kubectl get pods -n argocd -l 'app.kubernetes.io/name=argocd-application-controller' -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; \
+   do echo "waiting for argocd-application-controller pod" && sleep 1; done
+  while [[ $(kubectl get pods -n argocd -l 'app.kubernetes.io/name=argocd-redis' -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; \
+   do echo "waiting for argocd-redis pod" && sleep 1; done
+  while [[ $(kubectl get pods -n argocd -l 'app.kubernetes.io/name=argocd-repo-server' -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; \
+   do echo "waiting for argocd-repo-server pod" && sleep 1; done
+  kubectl get pods -n argocd
+
+@_wait:
+  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
+  echo "waiting 5 seconds..." && sleep 5
+  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
+  echo "waiting 5 seconds..." && sleep 5
+  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
