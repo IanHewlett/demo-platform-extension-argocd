@@ -5,12 +5,12 @@ podman_mount_path := "/Users/ianhewlett:/Users/ianhewlett"
 _default:
   @just --list
 
-demo:
+@demo:
   just podman
   just minikube
   just argocd
 
-clean:
+@clean:
   minikube stop || true
   minikube delete || true
   podman machine stop {{podman_machine}}
@@ -24,14 +24,14 @@ clean:
       || (echo "starting podman machine" && podman machine start {{podman_machine}})
 
 # start minikube if it is not running
-minikube:
-    @(minikube status | grep -q "Running" && [[ $? -eq 0 ]] && echo "minikube running") || \
+@minikube:
+    (minikube status | grep -q "Running" && [[ $? -eq 0 ]] && echo "minikube running") || \
       (echo "starting minikube" && \
         minikube start --driver=podman --container-runtime=cri-o)
     kubectl label nodes minikube "nodegroup"="management-nodes"
     kubectl label nodes minikube "node.kubernetes.io/role"="management"
 
-argocd:
+@argocd:
   kubectl apply -k cluster/argocd
   just _secret
   just _check
@@ -60,4 +60,12 @@ argocd:
   echo "waiting 5 seconds..." && sleep 5
   kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
   echo "waiting 5 seconds..." && sleep 5
+  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
+  echo "waiting 5 seconds..." && sleep 5
+  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
+  echo "waiting 10 seconds..." && sleep 10
+  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
+  echo "waiting 10 seconds..." && sleep 10
+  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
+  echo "waiting 15 seconds..." && sleep 15
   kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
