@@ -2,14 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: namespaces
+  name: cluster
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    path: cluster/namespaces
+    path: cluster
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
     targetRevision: 0.0.6
   destination:
@@ -21,7 +21,7 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-      - allowEmpty=true
+    - allowEmpty=true
   ignoreDifferences:
     - group: argoproj.io
       jsonPointers:
