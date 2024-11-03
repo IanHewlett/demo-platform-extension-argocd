@@ -4,8 +4,6 @@ kind: Application
 metadata:
   name: applications
   namespace: argocd
-  labels:
-    app.kubernetes.io/name: applications
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
