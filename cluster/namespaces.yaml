@@ -11,7 +11,7 @@ spec:
   source:
     path: cluster/namespaces
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
-    targetRevision: 0.0.6
+    targetRevision: 0.0.7
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc

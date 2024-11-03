@@ -8,4 +8,4 @@ resources:
   - default-project.yaml
   - namespaces.yaml
   - services.yaml
-#  - applications.yaml
+  - applications.yaml
