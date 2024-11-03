@@ -1,18 +1,18 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: metrics-server-release
   namespace: argocd
   labels:
-    app.kubernetes.io/managed-by: argocd-autopilot
     app.kubernetes.io/name: metrics-server-release
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/IanHewlett/demo-platform-service-metrics-server.git
     path: overlays/local
+    repoURL: https://github.com/IanHewlett/demo-platform-service-metrics-server.git
     targetRevision: 0.0.2
   destination:
     server: https://kubernetes.default.svc
