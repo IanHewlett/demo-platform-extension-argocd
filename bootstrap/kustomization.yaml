@@ -4,4 +4,5 @@ namespace: argocd
 resources:
   - default-project.yaml
   - argocd.yaml
+  - namespaces.yaml
   - services.yaml
