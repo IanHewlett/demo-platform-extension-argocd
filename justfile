@@ -31,10 +31,10 @@ minikube:
     kubectl label nodes minikube "node.kubernetes.io/role"="management"
 
 argocd:
-  kubectl apply -k bootstrap/argocd
+  kubectl apply -k cluster/argocd
   just _secret
   just _check
-  kubectl apply -k bootstrap
+  kubectl apply -k cluster
   just _wait
 
 @_secret:

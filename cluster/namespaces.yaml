@@ -11,7 +11,7 @@ metadata:
 spec:
   project: default
   source:
-    path: namespaces
+    path: cluster/namespaces
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
   destination:
     namespace: argocd
