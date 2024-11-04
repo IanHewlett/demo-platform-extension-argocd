@@ -3,13 +3,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: argocd
 resources:
+  - default-project.yaml
   - cluster.yaml
+  - ../../cluster
 patches:
   - target:
       kind: Application
       name: cluster
     patch: |
       - op: add
-        path: /spec/source/targetRevision
+        path: /spec/source/path
         value:
-          main
+          environments/local

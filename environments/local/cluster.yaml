@@ -1,20 +1,5 @@
 ---
 apiVersion: argoproj.io/v1alpha1
-kind: AppProject
-metadata:
-  name: default
-  namespace: argocd
-spec:
-  clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
-  destinations:
-    - namespace: '*'
-      server: '*'
-  sourceRepos:
-    - '*'
----
-apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cluster
@@ -24,7 +9,6 @@ metadata:
 spec:
   project: default
   source:
-    path: cluster
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
   destination:
     namespace: argocd
