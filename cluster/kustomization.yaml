@@ -6,5 +6,5 @@ resources:
 #  - applications.yaml
   - argocd.yaml
   - namespaces.yaml
-  - services.yaml
+#  - services.yaml
   - serviceset.yaml
