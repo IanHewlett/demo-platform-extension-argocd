@@ -26,7 +26,7 @@ spec:
   source:
     path: environments/local
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
-    targetRevision: main
+    targetRevision: 0.0.10
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
