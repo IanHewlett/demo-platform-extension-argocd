@@ -35,7 +35,7 @@ _default:
   kubectl apply -k cluster/argocd
   just _secret
   just _check
-  kubectl apply -f environments/local/cluster.yaml
+  kubectl apply -k environments/local
   just _wait
 
 @_secret:
