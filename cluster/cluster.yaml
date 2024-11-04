@@ -9,9 +9,9 @@ metadata:
 spec:
   project: default
   source:
-    path: cluster
+    path: cluster/root
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
-    targetRevision: 0.0.7
+    targetRevision: main
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc

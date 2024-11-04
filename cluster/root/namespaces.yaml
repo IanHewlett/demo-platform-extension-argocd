@@ -2,16 +2,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-cd
+  name: namespaces
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    path: cluster/argocd
+    path: cluster/namespaces
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
-    targetRevision: 0.0.7
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
@@ -21,7 +20,7 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    - allowEmpty=true
+      - allowEmpty=true
   ignoreDifferences:
     - group: argoproj.io
       jsonPointers:
