@@ -27,7 +27,7 @@ spec:
       source:
         path: '{{target_path}}'
         repoURL: 'https://github.com/IanHewlett/demo-platform-service-{{name}}.git'
-        targetRevision: '{{version}}'
+        targetRevision: '{{target_version}}'
       destination:
         server: "https://kubernetes.default.svc"
         namespace: argocd
