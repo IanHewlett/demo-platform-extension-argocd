@@ -1,5 +1,12 @@
-{
-  "name": "metrics-server",
-  "target_path": "overlays/local",
-  "version": "0.0.2"
-}
+[
+  {
+    "name": "metrics-server",
+    "target_path": "overlays/local",
+    "version": "0.0.2"
+  },
+  {
+    "name": "kube-state-metrics",
+    "target_path": "release",
+    "version": "0.0.2"
+  }
+]

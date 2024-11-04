@@ -2,7 +2,7 @@
 #apiVersion: argoproj.io/v1alpha1
 #kind: Application
 #metadata:
-#  name: kube-state-metric-release
+#  name: kube-state-metrics-release
 #  namespace: argocd
 #  finalizers:
 #    - resources-finalizer.argocd.argoproj.io
