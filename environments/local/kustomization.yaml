@@ -13,4 +13,4 @@ patches:
       - op: add
         path: /spec/source/targetRevision
         value:
-          0.0.10
+          0.0.11
