@@ -1,0 +1,6 @@
+{
+  "name": "cert-manager",
+  "target_url": "https://github.com/IanHewlett/demo-platform-service-cert-manager.git",
+  "target_path": "release",
+  "target_version": "0.0.1"
+}
