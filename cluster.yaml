@@ -24,7 +24,7 @@ metadata:
 spec:
   project: default
   source:
-    path: cluster/root
+    path: cluster
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
     targetRevision: main
   destination:

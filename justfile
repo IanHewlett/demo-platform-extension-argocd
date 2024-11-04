@@ -75,5 +75,3 @@ _default:
   kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
   echo "waiting 15 seconds..." && sleep 15
   kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
-  echo "waiting 30 seconds..." && sleep 30
-  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
