@@ -13,8 +13,8 @@ _default:
 @clean:
   minikube stop || true
   minikube delete || true
-  podman machine stop {{podman_machine}}
-  podman machine rm {{podman_machine}} --force
+  podman machine stop {{podman_machine}} || true
+  podman machine rm {{podman_machine}} --force || true
 
 # initialize podman-machine if it does not exist, and then start the podman-machine if it is not running
 @podman:
