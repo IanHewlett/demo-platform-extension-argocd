@@ -1,5 +1,5 @@
 {
   "name": "metrics-server",
-  "path": "overlays/local",
+  "target_path": "overlays/local",
   "version": "0.0.2"
 }

@@ -25,7 +25,7 @@ spec:
     spec:
       project: default
       source:
-        path: '{{path}}'
+        path: '{{target_path}}'
         repoURL: 'https://github.com/IanHewlett/demo-platform-service-{{name}}.git'
         targetRevision: '{{version}}'
       destination:
