@@ -5,3 +5,12 @@ namespace: argocd
 resources:
   - cluster.yaml
   - ../../cluster
+patches:
+  - target:
+      kind: Application
+      name: cluster
+    patch: |
+      - op: add
+        path: /spec/source/targetRevision
+        value:
+          0.0.10
