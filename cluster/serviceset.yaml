@@ -1,38 +1,33 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"
   name: serviceset
   namespace: argocd
-
 spec:
   generators:
-    - git:
-        files:
-          - path: bootstrap/services/*.json
-        repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
-        requeueAfterSeconds: 20
-#        revision: ""
-#        template:
-#          metadata: {}
-#          spec:
-#            destination: {}
-#            project: ""
-
+  - git:
+      files:
+      - path: cluster/services/*.json
+      repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
+      requeueAfterSeconds: 20
+      revision: ""
+      template:
+        metadata: {}
+        spec:
+          destination: {}
+          project: ""
   syncPolicy:
     preserveResourcesOnDeletion: true
-
   template:
     metadata:
-      name: {{name}}-release
+      name: '{{name}}-release'
       namespace: argocd
     spec:
       project: default
       source:
-        path: {{path}}
-        repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
-        targetRevision: {{version}}
+        path: '{{path}}'
+        repoURL: 'https://github.com/IanHewlett/demo-platform-service-{{name}}.git'
+        targetRevision: '{{version}}'
       destination:
         server: "https://kubernetes.default.svc"
         namespace: argocd
@@ -40,8 +35,3 @@ spec:
         automated:
           allowEmpty: true
           selfHeal: true
-      ignoreDifferences:
-        - group: argoproj.io
-          jsonPointers:
-            - /status
-          kind: Application
