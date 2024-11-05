@@ -17,3 +17,12 @@ patches:
         path: /spec/source/path
         value:
           environments/local
+
+  - target:
+      kind: Namespace
+      name: istio-system
+    patch: |
+      - op: add
+        path: /metadata/labels/topology.istio.io~1network
+        value:
+          minikube-local

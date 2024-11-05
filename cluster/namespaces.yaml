@@ -19,7 +19,7 @@ spec:
 #      - target:
 #          kind: Namespace
 #          name: istio-system
-#        patch: |-
+#        patch: |
 #          - op: add
 #            path: /metadata/labels/topology.istio.io~1network
 #            value:
