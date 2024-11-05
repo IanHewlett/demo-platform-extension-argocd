@@ -7,4 +7,4 @@ resources:
   - default-project.yaml
   - cluster.yaml
   - namespaces.yaml
-#  - services.yaml
+  - services.yaml
