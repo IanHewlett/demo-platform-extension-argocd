@@ -31,9 +31,9 @@ spec:
     spec:
       project: default
       source:
-        path: '{{target_path}}'
-        repoURL: '{{target_url}}'
-        targetRevision: '{{target_version}}'
+        path: '{{source_path}}'
+        repoURL: '{{source_url}}'
+        targetRevision: '{{source_version}}'
       destination:
         server: "https://kubernetes.default.svc"
         namespace: argocd
