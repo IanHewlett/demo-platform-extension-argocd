@@ -1,0 +1,14 @@
+---
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+namespace: argocd
+
+patches:
+  - target:
+      kind: ApplicationSet
+      name: services
+    patch: |
+      - op: add
+        path: /spec/generators/0/git/files/0/path
+        value:
+          environments/local/services/*.json

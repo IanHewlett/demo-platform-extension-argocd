@@ -4,7 +4,10 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-  - ../../../cluster
+  - ../../cluster
+
+components:
+  - ../local
 
 patches:
   - target:
@@ -14,7 +17,7 @@ patches:
       - op: add
         path: /spec/source/path
         value:
-          environments/local/us-east-0
+          environments/local-minikube-us-west-0
 
   - target:
       kind: Application
@@ -30,4 +33,4 @@ patches:
             - op: add
               path: /metadata/labels/topology.istio.io~1network
               value:
-                local-minikube-us-east-0
+                local-minikube-us-west-0
