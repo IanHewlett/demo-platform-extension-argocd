@@ -1,6 +1,0 @@
-{
-  "name": "wiremock",
-  "target_url": "https://github.com/IanHewlett/demo-platform-application-wiremock.git",
-  "target_path": "release",
-  "target_version": "0.0.1"
-}
