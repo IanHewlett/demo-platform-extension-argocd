@@ -22,21 +22,25 @@ spec:
           project: ""
 
   syncPolicy:
-    preserveResourcesOnDeletion: true
+    preserveResourcesOnDeletion: false
 
   template:
     metadata:
       name: '{{name}}-release'
       namespace: argocd
+
     spec:
       project: default
+
       source:
         path: '{{source_path}}'
         repoURL: '{{source_url}}'
         targetRevision: '{{source_version}}'
+
       destination:
         server: "https://kubernetes.default.svc"
         namespace: argocd
+
       syncPolicy:
         automated:
           allowEmpty: true
