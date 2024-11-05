@@ -25,11 +25,11 @@ patches:
       - op: add
         path: /spec/source/kustomize/patches/-
         value:
-          - target:
+          target:
               kind: Namespace
               name: istio-system
-            patch: |
-              - op: add
-                path: /metadata/labels/topology.istio.io~1network
-                value:
-                  minikube-local
+          patch: |
+            - op: add
+              path: /metadata/labels/topology.istio.io~1network
+              value:
+                minikube-local
