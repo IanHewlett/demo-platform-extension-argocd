@@ -1,0 +1,33 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: argocd
+
+resources:
+  - ../../../cluster
+
+patches:
+  - target:
+      kind: Application
+      name: cluster
+    patch: |
+      - op: add
+        path: /spec/source/path
+        value:
+          environments/local
+
+  - target:
+      kind: Application
+      name: namespaces
+    patch: |
+      - op: add
+        path: /spec/source/kustomize/patches/-
+        value:
+          target:
+              kind: Namespace
+              name: istio-system
+          patch: |
+            - op: add
+              path: /metadata/labels/topology.istio.io~1network
+              value:
+                local-minikube-us-east-0
