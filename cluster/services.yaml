@@ -6,6 +6,7 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+
 spec:
   generators:
   - git:
@@ -19,8 +20,10 @@ spec:
         spec:
           destination: {}
           project: ""
+
   syncPolicy:
     preserveResourcesOnDeletion: true
+
   template:
     metadata:
       name: '{{name}}-release'
