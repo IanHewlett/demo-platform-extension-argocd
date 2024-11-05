@@ -5,6 +5,14 @@ namespace: argocd
 
 patches:
   - target:
+      kind: Application
+      name: namespaces
+    patch: |
+      - op: add
+        path: /spec/source/path
+        value: environments/local/namespaces
+
+  - target:
       kind: ApplicationSet
       name: services
     patch: |
