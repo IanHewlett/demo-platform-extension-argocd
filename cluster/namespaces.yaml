@@ -14,16 +14,16 @@ spec:
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
     path: cluster/namespaces
 
-    kustomize:
-      patches:
-      - target:
-          kind: Namespace
-          name: istio-system
-        patch: |
-          - op: replace
-            path: /metadata/labels/topology.istio.io~1network
-            value:
-              minikube-local
+#    kustomize:
+#      patches:
+#      - target:
+#          kind: Namespace
+#          name: istio-system
+#        patch: |
+#          - op: replace
+#            path: /metadata/labels/topology.istio.io~1network
+#            value:
+#              minikube-local
 
   destination:
     server: https://kubernetes.default.svc
