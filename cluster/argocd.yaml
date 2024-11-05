@@ -6,14 +6,18 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+
 spec:
   project: default
+
   source:
-    path: cluster/argocd
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
+    path: cluster/argocd
+
   destination:
-    namespace: argocd
     server: https://kubernetes.default.svc
+    namespace: argocd
+
   syncPolicy:
     automated:
       allowEmpty: true
@@ -21,6 +25,7 @@ spec:
       selfHeal: true
     syncOptions:
     - allowEmpty=true
+
   ignoreDifferences:
     - group: argoproj.io
       jsonPointers:
