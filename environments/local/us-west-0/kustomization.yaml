@@ -14,7 +14,7 @@ patches:
       - op: add
         path: /spec/source/path
         value:
-          environments/local
+          environments/local/us-west-0
 
   - target:
       kind: Application
