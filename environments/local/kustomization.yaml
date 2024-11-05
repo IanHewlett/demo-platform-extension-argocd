@@ -4,8 +4,8 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-  - default-project.yaml
-  - cluster.yaml
+#  - default-project.yaml
+#  - cluster.yaml
   - ../../cluster
 
 patches:
