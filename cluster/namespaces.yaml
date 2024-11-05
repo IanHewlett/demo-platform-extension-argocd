@@ -20,7 +20,7 @@ spec:
           kind: Namespace
           name: istio-system
         patch: |
-          - op: add
+          - op: replace
             path: /metadata/labels/topology.istio.io~1network
             value:
               minikube-local
