@@ -32,4 +32,4 @@ patches:
             - op: add
               path: /metadata/labels/topology.istio.io~1network
               value:
-                minikube-local-test
+                minikube-local
