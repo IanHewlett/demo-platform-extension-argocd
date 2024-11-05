@@ -18,11 +18,11 @@ patches:
         value:
           environments/local
 
-  - target:
-      kind: Namespace
-      name: istio-system
-    patch: |
-      - op: add
-        path: /metadata/labels/topology.istio.io~1network
-        value:
-          minikube-local
+#  - target:
+#      kind: Application
+#      name: namespaces
+#    patch: |
+#      - op: add
+#        path: /metadata/labels/topology.istio.io~1network
+#        value:
+#          minikube-local

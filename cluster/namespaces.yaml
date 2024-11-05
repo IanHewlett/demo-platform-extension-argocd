@@ -14,8 +14,8 @@ spec:
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
     path: cluster/namespaces
 
-#    kustomize:
-#      patches:
+    kustomize:
+      patches: []
 #      - target:
 #          kind: Namespace
 #          name: istio-system
