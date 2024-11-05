@@ -24,8 +24,8 @@ patches:
         path: /spec/source/kustomize/patches/-
         value:
           target:
-              kind: Namespace
-              name: istio-system
+            kind: Namespace
+            name: istio-system
           patch: |
             - op: add
               path: /metadata/labels/topology.istio.io~1network
