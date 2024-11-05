@@ -4,4 +4,4 @@ kind: Namespace
 metadata:
   name: istio-system
   labels:
-    topology.istio.io/network: cluster-name
+    topology.istio.io/network: new-cluster-name
