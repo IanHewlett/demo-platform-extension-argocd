@@ -6,21 +6,6 @@ namespace: argocd
 patches:
   - target:
       kind: Application
-      name: argo-cd
-    patch: |
-      - op: add
-        path: /spec/source/kustomize/patches/-
-        value:
-          target:
-            kind: Kustomization
-          patch: |
-            - op: add
-              path: /resources/1
-              value:
-                github.com/argoproj/argo-cd/manifests/core-install?ref=v2.13.0
-
-  - target:
-      kind: Application
       name: namespaces
     patch: |
       - op: add
