@@ -5,7 +5,7 @@ namespace: argocd
 
 resources:
   - argocd-ns.yaml
-  - github.com/argoproj/argo-cd/manifests/core-install?ref=v2.12.6
+  - github.com/argoproj/argo-cd/manifests/core-install?ref=v2.13.0
 
 configMapGenerator:
   - behavior: merge
