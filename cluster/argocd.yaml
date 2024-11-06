@@ -13,6 +13,8 @@ spec:
   source:
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
     path: cluster/argocd
+    kustomize:
+      patches: []
 
   destination:
     server: https://kubernetes.default.svc
