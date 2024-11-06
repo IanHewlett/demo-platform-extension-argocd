@@ -13,11 +13,11 @@ configMapGenerator:
       - |
         repository.credentials=- passwordSecret:
             key: git_token
-            name: autopilot-secret
+            name: argocd-sync-secret
           url: https://github.com/
           usernameSecret:
             key: git_username
-            name: autopilot-secret
+            name: argocd-sync-secret
     name: argocd-cm
 
 patches:

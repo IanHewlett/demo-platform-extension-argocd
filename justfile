@@ -39,7 +39,7 @@ _default:
   just _wait
 
 @_secret:
-  kubectl create secret generic autopilot-secret -n argocd \
+  kubectl create secret generic argocd-sync-secret -n argocd \
     --from-literal=git_username=username \
     --from-literal=git_token="$GITHUB_TOKEN" \
     --dry-run=client -o yaml | kubectl apply -f -
