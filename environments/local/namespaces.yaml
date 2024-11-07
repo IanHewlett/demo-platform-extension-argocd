@@ -12,7 +12,6 @@ spec:
 
   source:
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
-    path: cluster/namespaces
     kustomize:
       patches: []
 
