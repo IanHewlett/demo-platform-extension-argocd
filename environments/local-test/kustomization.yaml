@@ -23,7 +23,7 @@ patches:
       - op: add
         path: /spec/generators/0/git/files/0/path
         value:
-          environments/local/services/*.json
+          environments/local-test/services/*.json
 
   - target:
       kind: Namespace
