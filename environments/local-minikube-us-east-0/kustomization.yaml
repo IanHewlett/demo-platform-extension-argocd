@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ../../cluster
   - ../local/namespaces
-  - external-secrets-cluster-secrets.yaml
+  - ../local/external-secrets-cluster-secrets.yaml
 
 components:
   - ../local
@@ -28,3 +28,24 @@ patches:
         path: /metadata/labels/topology.istio.io~1network
         value:
           local-minikube-us-east-0
+
+  - target:
+      kind: Application
+      name: external-secrets-cluster-secrets
+    patch: |
+      - op: add
+        path: /spec/source/kustomize
+        value:
+          patches:
+          - target:
+              kind: ClusterSecretStore
+              name: vault-admin
+            patch: |
+              - op: add
+                path: /spec/provider/vault/server
+                value:
+                  http://vault.vault.svc.cluster.local:8200
+              - op: add
+                path: /spec/provider/vault/auth/kubernetes/mountPath
+                value:
+                  local-minikube-us-east-0
