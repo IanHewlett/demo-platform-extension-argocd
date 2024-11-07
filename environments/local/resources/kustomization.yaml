@@ -4,3 +4,4 @@ kind: Kustomization
 
 resources:
   - external-secrets-cluster-secrets.yaml
+  - istio-system.yaml
