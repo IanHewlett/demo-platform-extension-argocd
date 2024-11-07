@@ -2,7 +2,7 @@
 vault_namespace="admin"
 role_name="di-admin-kubernetes-role"
 policy_name="di-admin-kubernetes-policy"
-auth_path="local-minikube"
+auth_path="local-minikube-us-east-0"
 vault policy write -namespace="$vault_namespace" "$policy_name" - <<EOF
 path "secret/*" {
   capabilities = ["read"]
