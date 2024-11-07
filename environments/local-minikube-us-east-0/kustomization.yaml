@@ -5,6 +5,7 @@ namespace: argocd
 
 resources:
   - ../../cluster
+  - namespaces.yaml
 
 components:
   - ../local
