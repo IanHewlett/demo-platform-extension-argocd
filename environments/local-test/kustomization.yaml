@@ -4,10 +4,7 @@ kind: Kustomization
 
 resources:
   - ../../cluster
-  - ../local/namespaces
-
-components:
-  - ../local
+  - namespaces
 
 patches:
   - target:
@@ -17,7 +14,16 @@ patches:
       - op: add
         path: /spec/source/path
         value:
-          environments/local-minikube-us-east-0
+          environments/local-test
+
+  - target:
+      kind: ApplicationSet
+      name: services
+    patch: |
+      - op: add
+        path: /spec/generators/0/git/files/0/path
+        value:
+          environments/local/services/*.json
 
   - target:
       kind: Namespace
