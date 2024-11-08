@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
   - external-secrets-cluster-secrets.yaml
+  - cert-manager.yaml
   - istio-base.yaml
   - istiod.yaml
   - wiremock.yaml
