@@ -8,6 +8,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
+  goTemplate: true
   generators:
     - git:
         files:
@@ -26,20 +27,20 @@ spec:
 
   template:
     metadata:
-      name: '{{name}}-release'
+      name: '{{.name}}-release'
       namespace: argocd
 
     spec:
       project: default
 
       source:
-        repoURL: '{{source_url}}'
-        path: '{{source_path}}'
-        targetRevision: '{{source_version}}'
+        repoURL: '{{.source_url}}'
+        path: '{{.source_path}}'
+        targetRevision: '{{.source_version}}'
 
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: '{{namespace}}'
+        namespace: '{{.namespace}}'
 
       syncPolicy:
         automated:
