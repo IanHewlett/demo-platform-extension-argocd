@@ -18,7 +18,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: istio-system
 
   syncPolicy:
     automated:
@@ -27,6 +27,10 @@ spec:
       selfHeal: true
     syncOptions:
       - allowEmpty=true
+      - CreateNamespace=true
+    managedNamespaceMetadata:
+      labels:
+        topology.istio.io/network: cluster-name
 
   ignoreDifferences:
     - group: argoproj.io

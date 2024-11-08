@@ -45,17 +45,8 @@ patches:
       name: istiod-base-release
     patch: |
       - op: add
-        path: /spec/source/kustomize
-        value:
-          patches:
-            - target:
-                kind: Namespace
-                name: istio-system
-              patch: |
-                - op: add
-                  path: /metadata/labels/topology.istio.io~1network
-                  value:
-                    local-minikube-us-east-0
+        path: /spec/syncPolicy/managedNamespaceMetadata/labels/topology.istio.io~1network
+        value: local-minikube-us-east-0
 
   - target:
       kind: Application
