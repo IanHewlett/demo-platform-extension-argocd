@@ -4,7 +4,6 @@ kind: Kustomization
 
 resources:
   - ../../cluster
-  - ../local/namespaces
   - ../local/resources
 
 components:
