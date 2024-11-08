@@ -21,15 +21,6 @@ patches:
           environments/local-minikube-us-east-0
 
   - target:
-      kind: Namespace
-      name: istio-system
-    patch: |
-      - op: add
-        path: /metadata/labels/topology.istio.io~1network
-        value:
-          local-minikube-us-east-0
-
-  - target:
       kind: Application
       name: external-secrets-cluster-secrets
     patch: |
@@ -49,6 +40,23 @@ patches:
                 path: /spec/provider/vault/auth/kubernetes/mountPath
                 value:
                   local-minikube-us-east-0
+
+  - target:
+      kind: Application
+      name: istiod-base-release
+    patch: |
+      - op: add
+        path: /spec/source/kustomize
+        value:
+          patches:
+            - target:
+                kind: Namespace
+                name: istio-system
+              patch: |
+                - op: add
+                  path: /metadata/labels/topology.istio.io~1network
+                  value:
+                    local-minikube-us-east-0
 
   - target:
       kind: Application
