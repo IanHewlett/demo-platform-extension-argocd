@@ -1,0 +1,12 @@
+{
+  "name": "istio-base",
+  "source_url": "https://github.com/IanHewlett/demo-platform-services-istio-system.git",
+  "source_path": "release/istio-base",
+  "source_version": "main",
+  "namespace": "istio-system",
+  "create_namespace": true,
+  "label_namespace": true,
+  "namespace_labels": [
+    "topology.istio.io/network: cluster-name"
+  ]
+}
