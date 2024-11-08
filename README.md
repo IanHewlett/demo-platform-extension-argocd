@@ -25,3 +25,7 @@ ArgoCD Application:
   2) values
   3) parameters
   - with the order of precedence being that parameters override values and values override valuesFiles
+
+Namespace Management:
+- Namespaces can be created by the ArgoCD Application by specifying 'CreateNamespace=true' in spec/syncPolicy/syncOptions
+- Labels and Annotations can be added to the automatically created namespace by through spec/syncPolicy/managedNamespaceMetadata

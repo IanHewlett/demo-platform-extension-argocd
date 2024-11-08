@@ -39,9 +39,17 @@ spec:
 
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: argocd
+        namespace: '{{namespace}}'
 
       syncPolicy:
         automated:
           allowEmpty: true
           selfHeal: true
+
+  templatePatch: |
+    {{- if .create_namespace }}
+    spec:
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+    {{- end }}
