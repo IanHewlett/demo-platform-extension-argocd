@@ -18,3 +18,10 @@ Bootstrap Process:
 Useful commands:
 'kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A'
 'argocd admin dashboard -n argocd'
+
+ArgoCD Application:
+- You can pass values to a helm chart through an Application in three ways:
+  1) valuesFiles
+  2) values
+  3) parameters
+  - with the order of precedence being that parameters override values and values override valuesFiles
