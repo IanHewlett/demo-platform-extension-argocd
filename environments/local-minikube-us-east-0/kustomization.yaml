@@ -42,7 +42,7 @@ patches:
 
   - target:
       kind: Application
-      name: istiod-base-release
+      name: istio-base-release
     patch: |
       - op: add
         path: /spec/syncPolicy/managedNamespaceMetadata/labels/topology.istio.io~1network
