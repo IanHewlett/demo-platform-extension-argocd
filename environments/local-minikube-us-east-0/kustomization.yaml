@@ -67,3 +67,5 @@ patches:
                   value:
                     - name: global.network
                       value: local-minikube-us-east-0
+                    - name: pilot.replicaCount
+                      value: 2
