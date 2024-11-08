@@ -57,7 +57,7 @@ spec:
         managedNamespaceMetadata:
           labels:
             {{- range $labelKeyPair := .namespace_labels }}
-            {{ $labelKeyPair | toJson }}
+            {{ $labelKeyPair }}
             {{- end }}
         {{- end }}
     {{- end }}
