@@ -65,5 +65,5 @@ patches:
                 - op: add
                   path: /spec/sources/0/helm/parameters
                   value:
-                    name: global.network
-                    value: local-minikube-us-east-0
+                    - name: global.network
+                      value: local-minikube-us-east-0
