@@ -94,3 +94,19 @@ spec:
                       value: '{{ $valueParam.value }}'
                   {{- end }}
     {{- end }}
+
+    {{- if .has_kustomize_values }}
+    spec:
+      source:
+        kustomize:
+          patches:
+            - target:
+                kind: ClusterSecretStore
+                name: vault-admin
+              patch: |
+                {{- range $kustomization:= .value_kustomizations }}
+                - op: add
+                  path: {{ $kustomization.path }}
+                  value: {{ $kustomization.value }}
+                {{- end }}
+    {{- end }}
