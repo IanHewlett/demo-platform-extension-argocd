@@ -20,6 +20,15 @@ patches:
           environments/local-minikube-us-east-0
 
   - target:
+      kind: ApplicationSet
+      name: services
+    patch: |
+      - op: add
+        path: /spec/generators/0/merge/generators/1/git/files/0/path
+        value:
+          environments/local-minikube-us-east-0/services/*.json
+
+  - target:
       kind: Application
       name: external-secrets-cluster-secrets
     patch: |
