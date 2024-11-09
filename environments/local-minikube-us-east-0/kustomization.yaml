@@ -42,14 +42,6 @@ patches:
 
   - target:
       kind: Application
-      name: istio-base-release
-    patch: |
-      - op: add
-        path: /spec/syncPolicy/managedNamespaceMetadata/labels/topology.istio.io~1network
-        value: local-minikube-us-east-0
-
-  - target:
-      kind: Application
       name: istiod-release
     patch: |
       - op: add
