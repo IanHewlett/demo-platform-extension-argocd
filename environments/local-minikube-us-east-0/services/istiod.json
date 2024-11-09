@@ -1,6 +1,5 @@
 {
   "name": "istiod",
-  "has_values": true,
   "value_parameters": [
     {
       "key": "global.network",

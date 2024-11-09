@@ -68,7 +68,7 @@ spec:
         {{- end }}
     {{- end }}
 
-    {{- if .has_values }}
+    {{- if .value_parameters }}
     spec:
       source:
         kustomize:
@@ -86,7 +86,7 @@ spec:
                   {{- end }}
     {{- end }}
 
-    {{- if .has_kustomize_values }}
+    {{- if .value_kustomizations }}
     spec:
       source:
         kustomize:
