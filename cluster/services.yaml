@@ -91,6 +91,6 @@ spec:
                   value:
                   {{- range $valueParam:= .value_parameters }}
                     - name: {{ $valueParam.key }}
-                      value: {{ $valueParam.value }}
+                      value: '{{ $valueParam.value }}'
                   {{- end }}
     {{- end }}
