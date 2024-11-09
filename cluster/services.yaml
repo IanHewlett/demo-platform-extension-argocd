@@ -102,7 +102,7 @@ spec:
           patches:
           {{- range $kustomization:= .value_kustomizations }}
             - target:
-                kind: '{{ $kustomization.target_kind }}'
+                kind: ClusterSecretStore
                 name: {{ $kustomization.target_name }}
               patch: |
                 - op: add
