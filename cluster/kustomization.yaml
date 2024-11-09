@@ -4,7 +4,6 @@ kind: Kustomization
 namespace: argocd
 resources:
   - argocd
-#  - argocd.yaml
   - default-project.yaml
   - cluster.yaml
   - services.yaml
