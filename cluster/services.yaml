@@ -20,22 +20,13 @@ spec:
               repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
               requeueAfterSeconds: 20
               revision: ""
-#              template:
-#                metadata: {}
-#                spec:
-#                  destination: {}
-#                  project: ""
+
           - git:
               files:
                 - path: environments/${INSTANCE}/services/*.json
               repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
               requeueAfterSeconds: 20
               revision: ""
-#              template:
-#                metadata: {}
-#                spec:
-#                  destination: {}
-#                  project: ""
 
   syncPolicy:
     preserveResourcesOnDeletion: false
