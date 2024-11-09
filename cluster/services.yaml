@@ -84,7 +84,7 @@ spec:
           patches:
             - target:
                 kind: Application
-                name: istiod
+                name: {{ .name }}
               patch: |
                 - op: add
                   path: /spec/sources/0/helm/parameters
