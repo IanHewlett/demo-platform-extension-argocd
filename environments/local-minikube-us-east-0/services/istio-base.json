@@ -1,0 +1,6 @@
+{
+  "name": "istio-base",
+  "namespace_labels": [
+    "topology.istio.io/network: local-minikube-us-east-0"
+  ]
+}
