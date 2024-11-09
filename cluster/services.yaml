@@ -11,8 +11,8 @@ spec:
   goTemplate: true
   generators:
     - merge:
-#        mergeKeys:
-#          - name
+        mergeKeys:
+          - name
         generators:
           - git:
               files:
