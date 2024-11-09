@@ -1,9 +1,9 @@
 {
   "name": "wiremock",
+  "namespace": "wiremock",
   "source_url": "https://github.com/IanHewlett/demo-platform-application-wiremock.git",
   "source_path": "release",
   "source_version": "main",
-  "namespace": "wiremock",
   "create_namespace": true,
   "label_namespace": true,
   "namespace_labels": [
