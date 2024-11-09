@@ -6,9 +6,6 @@ resources:
   - ../../cluster
   - ../local/resources
 
-components:
-  - ../local
-
 patches:
   - target:
       kind: Application
@@ -23,6 +20,10 @@ patches:
       kind: ApplicationSet
       name: services
     patch: |
+      - op: add
+        path: /spec/generators/0/merge/generators/0/git/files/0/path
+        value:
+          environments/local/services/*.json
       - op: add
         path: /spec/generators/0/merge/generators/1/git/files/0/path
         value:
