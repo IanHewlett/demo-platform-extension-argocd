@@ -100,13 +100,13 @@ spec:
       source:
         kustomize:
           patches:
+          {{- range $kustomization:= .value_kustomizations }}
             - target:
-                kind: ClusterSecretStore
-                name: vault-admin
+                kind: {{ $kustomization.target_kind }}
+                name: {{ $kustomization.target_name }}
               patch: |
-                {{- range $kustomization:= .value_kustomizations }}
                 - op: add
                   path: {{ $kustomization.path }}
                   value: {{ $kustomization.value }}
-                {{- end }}
+          {{- end }}
     {{- end }}
