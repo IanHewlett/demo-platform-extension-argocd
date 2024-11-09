@@ -4,7 +4,6 @@ kind: Kustomization
 
 resources:
   - ../../cluster
-#  - ../local/resources
 
 patches:
   - target:
@@ -28,24 +27,3 @@ patches:
         path: /spec/generators/0/merge/generators/1/git/files/0/path
         value:
           environments/local-minikube-us-east-0/services/*.json
-
-#  - target:
-#      kind: Application
-#      name: external-secrets-cluster-secrets
-#    patch: |
-#      - op: add
-#        path: /spec/source/kustomize
-#        value:
-#          patches:
-#          - target:
-#              kind: ClusterSecretStore
-#              name: vault-admin
-#            patch: |
-#              - op: add
-#                path: /spec/provider/vault/server
-#                value:
-#                  http://vault.vault.svc.cluster.local:8200
-#              - op: add
-#                path: /spec/provider/vault/auth/kubernetes/mountPath
-#                value:
-#                  local-minikube-us-east-0
