@@ -49,20 +49,20 @@ patches:
                 value:
                   local-minikube-us-east-0
 
-  - target:
-      kind: Application
-      name: istiod-release
-    patch: |
-      - op: add
-        path: /spec/source/kustomize
-        value:
-          patches:
-            - target:
-                kind: Application
-                name: istiod
-              patch: |
-                - op: add
-                  path: /spec/sources/0/helm/parameters
-                  value:
-                    - name: global.network
-                      value: local-minikube-us-east-0
+#  - target:
+#      kind: Application
+#      name: istiod-release
+#    patch: |
+#      - op: add
+#        path: /spec/source/kustomize
+#        value:
+#          patches:
+#            - target:
+#                kind: Application
+#                name: istiod
+#              patch: |
+#                - op: add
+#                  path: /spec/sources/0/helm/parameters
+#                  value:
+#                    - name: global.network
+#                      value: local-minikube-us-east-0

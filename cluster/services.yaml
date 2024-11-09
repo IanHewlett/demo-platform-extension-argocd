@@ -76,3 +76,19 @@ spec:
             {{- end }}
         {{- end }}
     {{- end }}
+
+    {{- if .has_values }}
+    spec:
+      source:
+        kustomize:
+          patches:
+            - target:
+                kind: Application
+                name: istiod
+              patch: |
+                - op: add
+                  path: /spec/sources/0/helm/parameters
+                  value:
+                    - name: global.network
+                      value: local-minikube-us-east-0
+    {{- end }}
