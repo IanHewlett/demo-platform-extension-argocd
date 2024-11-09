@@ -16,7 +16,7 @@ spec:
         generators:
           - git:
               files:
-                - path: environments/local/services/*.json
+                - path: cluster/services/*.json
               repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
               requeueAfterSeconds: 20
               revision: ""
