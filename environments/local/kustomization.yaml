@@ -8,6 +8,6 @@ patches:
       name: services
     patch: |
       - op: add
-        path: /spec/generators/0/git/files/0/path
+        path: /spec/generators/0/merge/generators/0/git/files/0/path
         value:
           environments/local/services/*.json

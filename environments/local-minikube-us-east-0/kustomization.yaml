@@ -6,8 +6,8 @@ resources:
   - ../../cluster
   - ../local/resources
 
-components:
-  - ../local
+#components:
+#  - ../local
 
 patches:
   - target:

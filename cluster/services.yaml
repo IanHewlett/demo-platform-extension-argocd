@@ -10,17 +10,32 @@ metadata:
 spec:
   goTemplate: true
   generators:
-    - git:
-        files:
-          - path: cluster/services/*.json
-        repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
-        requeueAfterSeconds: 20
-        revision: ""
-        template:
-          metadata: {}
-          spec:
-            destination: {}
-            project: ""
+    - merge:
+        mergeKeys:
+          - name
+        generators:
+          - git:
+              files:
+                - path: environments/local/services/*.json
+              repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
+              requeueAfterSeconds: 20
+              revision: ""
+#              template:
+#                metadata: {}
+#                spec:
+#                  destination: {}
+#                  project: ""
+          - git:
+              files:
+                - path: environments/local-minikube-us-east-0/services/*.json
+              repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
+              requeueAfterSeconds: 20
+              revision: ""
+#              template:
+#                metadata: {}
+#                spec:
+#                  destination: {}
+#                  project: ""
 
   syncPolicy:
     preserveResourcesOnDeletion: false
