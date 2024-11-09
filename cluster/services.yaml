@@ -89,8 +89,8 @@ spec:
                 - op: add
                   path: /spec/sources/0/helm/parameters
                   value:
-                    - name: global.network
-                      value: local-minikube-us-east-0
-                    - name: pilot.replicaCount
-                      value: '2'
+                  {{- range $valueParam:= .value_parameters }}
+                    - name: {{ $valueParam.key }}
+                      value: {{ $valueParam.value }}
+                  {{- end }}
     {{- end }}
