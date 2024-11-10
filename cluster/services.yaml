@@ -12,21 +12,21 @@ spec:
   generators:
     - merge:
         mergeKeys:
-          - name
+          - name # if it is possible to merge on file name, there is no need for a name field in instance values
         generators:
           - git:
               files:
                 - path: cluster/${ROLE}/services/*.json
               repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
               requeueAfterSeconds: 20
-              revision: ""
+              revision: "" # orchestration repo version for the role/env
 
           - git:
               files:
                 - path: environments/${INSTANCE}/services/*.json
               repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
               requeueAfterSeconds: 20
-              revision: ""
+              revision: "" # orchestration repo version for the role/env; all instances/cluster_names for a given role/env should share the same orchestration repo version
 
   syncPolicy:
     preserveResourcesOnDeletion: false
@@ -68,7 +68,7 @@ spec:
         {{- end }}
     {{- end }}
 
-    {{- if .value_parameters }}
+    {{- if .helm_values }}
     spec:
       source:
         kustomize:
@@ -80,18 +80,18 @@ spec:
                 - op: add
                   path: /spec/sources/0/helm/parameters
                   value:
-                  {{- range $valueParam:= .value_parameters }}
-                    - name: {{ $valueParam.key }}
-                      value: '{{ $valueParam.value }}'
+                  {{- range $param:= .helm_values }}
+                    - name: {{ $param.key }}
+                      value: '{{ $param.value }}'
                   {{- end }}
     {{- end }}
 
-    {{- if .value_kustomizations }}
+    {{- if .kustomization_values }}
     spec:
       source:
         kustomize:
           patches:
-          {{- range $kustomization:= .value_kustomizations }}
+          {{- range $kustomization:= .kustomization_values }}
             - target:
                 kind: {{ $kustomization.kind }}
                 name: {{ $kustomization.name }}
