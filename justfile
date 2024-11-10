@@ -42,14 +42,6 @@ _default:
     --from-literal=git_token="$GITHUB_TOKEN" \
     --dry-run=client -o yaml | kubectl apply -f -
 
-@_config:
-  kubectl create secret generic cluster-metadata -n kube-system \
-  --from-literal=role=local \
-  --from-literal=instance=local-minikube-us-east-0 \
-  --from-literal=management_node_group_name=wrong-nodes \
-  --from-literal=management_node_group_role=wrong \
-  --dry-run=client -o yaml | kubectl apply -f -
-
 @_check:
   while [[ $(kubectl get pods -n argocd -l 'app.kubernetes.io/name=argocd-applicationset-controller' -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; \
    do echo "waiting for argocd-applicationset-controller pod" && sleep 1; done
