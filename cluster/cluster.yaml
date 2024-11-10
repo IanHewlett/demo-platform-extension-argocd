@@ -12,8 +12,8 @@ spec:
 
   source:
     repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
-    plugin:
-      name: argocd-vault-plugin  # Enable AVP
+#    plugin:
+#      name: argocd-vault-plugin  # Enable AVP
 
   destination:
     server: https://kubernetes.default.svc
