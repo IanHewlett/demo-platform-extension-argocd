@@ -93,8 +93,8 @@ spec:
           patches:
           {{- range $kustomization:= .value_kustomizations }}
             - target:
-                kind: {{ $kustomization.target_kind }}
-                name: {{ $kustomization.target_name }}
+                kind: {{ $kustomization.kind }}
+                name: {{ $kustomization.name }}
               patch: |
                 - op: add
                   path: {{ $kustomization.path }}
