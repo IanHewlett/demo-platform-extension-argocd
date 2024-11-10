@@ -6,10 +6,10 @@ namespace: argocd
 resources:
   - argocd-ns.yaml
   - github.com/argoproj/argo-cd/manifests/core-install?ref=v2.12.6
-#  - cmp-plugin.yaml
+  - cmp-plugin.yaml
 
-#patchesStrategicMerge:
-#  - argocd-repo-server.yaml
+patchesStrategicMerge:
+  - argocd-repo-server.yaml
 
 configMapGenerator:
   - behavior: merge
