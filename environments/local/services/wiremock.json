@@ -5,7 +5,6 @@
   "source_path": "release",
   "source_version": "main",
   "create_namespace": true,
-  "label_namespace": true,
   "namespace_labels": [
     "istio-injection: enabled",
     "opa-istio-injection: enabled"

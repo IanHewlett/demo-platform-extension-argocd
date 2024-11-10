@@ -59,7 +59,7 @@ spec:
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
-        {{- if .label_namespace }}
+        {{- if .namespace_labels }}
         managedNamespaceMetadata:
           labels:
             {{- range $labelKeyPair := .namespace_labels }}
