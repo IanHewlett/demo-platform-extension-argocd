@@ -6,7 +6,6 @@ namespace: argocd
 resources:
   - argocd-ns.yaml
   - github.com/argoproj/argo-cd/manifests/core-install?ref=v2.12.6
-#  - cmp-plugin.yaml
 
 configMapGenerator:
   - behavior: merge
@@ -22,11 +21,6 @@ configMapGenerator:
     name: argocd-cm
 
 patches:
-#  - path: argocd-repo-server.yaml
-#    target:
-#      kind: Deployment
-#      name: argocd-repo-server
-
   - target:
       kind: Deployment
       name: argocd-redis

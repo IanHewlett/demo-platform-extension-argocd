@@ -43,8 +43,6 @@ spec:
         repoURL: '{{.source_url}}'
         path: '{{.source_path}}'
         targetRevision: '{{.source_version}}'
-#        plugin:
-#          name: argocd-vault-plugin  # Enable AVP
 
       destination:
         server: "https://kubernetes.default.svc"
