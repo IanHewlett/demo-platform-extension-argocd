@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-  - https://github.com/argoproj/argo-cd//manifests/cluster-install?ref=v2.12.6
+  - https://github.com/argoproj/argo-cd/manifests/core-install?ref=v2.12.6
   - cmp-plugin.yaml
 
 configMapGenerator:
