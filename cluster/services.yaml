@@ -44,11 +44,11 @@ spec:
         path: '{{.source_path}}'
         targetRevision: '{{.source_version}}'
 
-        plugin:
-          name: argocd-vault-plugin
-          env:
-            - name: VAULT_NAMESPACE
-              value: admin
+#        plugin:
+#          name: argocd-vault-plugin
+#          env:
+#            - name: VAULT_NAMESPACE
+#              value: admin
 
       destination:
         server: "https://kubernetes.default.svc"
