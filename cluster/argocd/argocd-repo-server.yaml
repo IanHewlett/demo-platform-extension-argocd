@@ -10,9 +10,9 @@ spec:
       automountServiceAccountToken: true
 
       volumes:
-        - configMap:
-            name: cmp-plugin
-          name: cmp-plugin
+#        - configMap:
+#            name: cmp-plugin
+#          name: cmp-plugin
         - name: custom-tools
           emptyDir: {}
 
