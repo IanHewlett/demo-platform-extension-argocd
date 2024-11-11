@@ -44,6 +44,12 @@ spec:
         path: '{{.source_path}}'
         targetRevision: '{{.source_version}}'
 
+        plugin:
+          name: argocd-vault-plugin-kustomize
+          env:
+            - name: VAULT_NAMESPACE
+              value: admin
+
       destination:
         server: "https://kubernetes.default.svc"
         namespace: '{{.namespace}}'
