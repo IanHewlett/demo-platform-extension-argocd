@@ -55,22 +55,22 @@ data:
             helm template $ARGOCD_APP_NAME -n $ARGOCD_APP_NAMESPACE ${ARGOCD_ENV_HELM_ARGS} . |
             argocd-vault-plugin generate -
       lockRepo: false
-#  avp.yaml: |
-#    apiVersion: argoproj.io/v1alpha1
-#    kind: ConfigManagementPlugin
-#    metadata:
-#      name: argocd-vault-plugin
-#    spec:
-#      allowConcurrency: true
-#      discover:
-#        find:
-#          command:
-#            - sh
-#            - "-c"
-#            - "find . -name '*.yaml' | xargs -I {} grep \"<path\\|avp\\.kubernetes\\.io\" {} | grep ."
-#      generate:
-#        command:
-#          - argocd-vault-plugin
-#          - generate
-#          - "."
-#      lockRepo: false
+  avp.yaml: |
+    apiVersion: argoproj.io/v1alpha1
+    kind: ConfigManagementPlugin
+    metadata:
+      name: argocd-vault-plugin
+    spec:
+      allowConcurrency: true
+      discover:
+        find:
+          command:
+            - sh
+            - "-c"
+            - "find . -name '*.yaml' | xargs -I {} grep \"<path\\|avp\\.kubernetes\\.io\" {} | grep ."
+      generate:
+        command:
+          - argocd-vault-plugin
+          - generate
+          - "."
+      lockRepo: false
