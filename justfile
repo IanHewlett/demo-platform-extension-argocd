@@ -36,23 +36,6 @@ _default:
   ./scripts/bootstrap.sh local-minikube-us-east-0
   just _wait
 
-@_secret:
-  kubectl create secret generic argocd-sync-secret -n argocd \
-    --from-literal=git_username=username \
-    --from-literal=git_token="$GITHUB_TOKEN" \
-    --dry-run=client -o yaml | kubectl apply -f -
-
-@_check:
-  while [[ $(kubectl get pods -n argocd -l 'app.kubernetes.io/name=argocd-applicationset-controller' -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; \
-   do echo "waiting for argocd-applicationset-controller pod" && sleep 1; done
-  while [[ $(kubectl get pods -n argocd -l 'app.kubernetes.io/name=argocd-application-controller' -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; \
-   do echo "waiting for argocd-application-controller pod" && sleep 1; done
-  while [[ $(kubectl get pods -n argocd -l 'app.kubernetes.io/name=argocd-redis' -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; \
-   do echo "waiting for argocd-redis pod" && sleep 1; done
-  while [[ $(kubectl get pods -n argocd -l 'app.kubernetes.io/name=argocd-repo-server' -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; \
-   do echo "waiting for argocd-repo-server pod" && sleep 1; done
-  kubectl get pods -n argocd
-
 @_wait:
   kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
   echo "waiting 5 seconds..." && sleep 5
