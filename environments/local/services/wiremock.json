@@ -4,9 +4,5 @@
   "source_url": "https://github.com/IanHewlett/demo-platform-application-wiremock.git",
   "source_path": "release",
   "source_version": "main",
-  "create_namespace": true,
-  "namespace_labels": [
-    "istio-injection: enabled",
-    "opa-istio-injection: enabled"
-  ]
+  "create_namespace": true
 }
