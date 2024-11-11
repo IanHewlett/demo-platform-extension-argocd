@@ -14,7 +14,7 @@ kubectl create secret generic argocd-sync-secret -n argocd \
   --from-literal=git_token="$GITHUB_TOKEN" \
   --dry-run=client -o yaml | kubectl apply -f -
 
-kubectl create secret argocd-vault-plugin-credentials -n argocd \
+kubectl create secret generic argocd-vault-plugin-credentials -n argocd \
   --from-literal=VAULT_ADDR="http://vault.vault.svc.cluster.local:8200" \
   --from-literal=AVP_TYPE="vault" \
   --from-literal=AVP_AUTH_TYPE="k8s" \
