@@ -14,7 +14,13 @@ kubectl create secret generic argocd-sync-secret -n argocd \
   --from-literal=git_token="$GITHUB_TOKEN" \
   --dry-run=client -o yaml | kubectl apply -f -
 
-kubectl apply -f cluster/argocd/argocd-vault-plugin-credentials.yaml
+kubectl create secret argocd-vault-plugin-credentials -n argocd \
+  --from-literal=VAULT_ADDR="http://vault.vault.svc.cluster.local:8200" \
+  --from-literal=AVP_TYPE="vault" \
+  --from-literal=AVP_AUTH_TYPE="k8s" \
+  --from-literal=AVP_K8S_MOUNT_PATH="auth/local-minikube-us-east-0" \
+  --from-literal=AVP_K8S_ROLE="di-admin-kubernetes-role" \
+  --dry-run=client -o yaml | kubectl apply -f -
 
 echo -e "\n${COLOR}bootstrapping ArgoCD Core onto the cluster: $bootstrap_env ${NC}"
 

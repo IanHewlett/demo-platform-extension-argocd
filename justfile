@@ -96,3 +96,8 @@ vault-secrets vault_namespace="vault":
   envsubst "$(printf '${%s} ' $(env | cut -d'=' -f1))" < ./scripts/vault-secrets.sh > tmp.sh
   kubectl -n {{vault_namespace}} exec -it vault-0 -- /bin/sh -c  "`cat tmp.sh`"
   rm -f tmp.sh
+
+test-vault-plugin:
+  kubectl apply -f test/e2e/argocd-vault-plugin/sample-secret.yaml
+  # get application; is healthy?
+  # get secret; has value?
