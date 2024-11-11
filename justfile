@@ -9,8 +9,10 @@ _default:
   just podman
   just minikube
   just vault
-  kubectl apply -k cluster/argocd
+  kubectl apply -f cluster/argocd/argocd-ns.yaml
   just _secret
+  kubectl apply -f cluster/argocd/argocd-vault-plugin-credentials.yaml
+  kubectl apply -k cluster/argocd
   just _check
   kubectl apply -f cluster/default-project.yaml
   kubectl apply -f test/e2e/argocd-vault-plugin/sample-secret.yaml -n argocd
