@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: argocd
 
 resources:
+  - argocd-ns.yaml
   - https://github.com/argoproj/argo-cd/manifests/core-install?ref=v2.12.6
   - cmp-plugin.yaml
 
