@@ -5,14 +5,18 @@ bootstrap_env="$1"
 COLOR='\033[0;32m'
 NC='\033[0m'
 
-echo -e "\n${COLOR}bootstrapping ArgoCD Core onto the cluster: $bootstrap_env ${NC}"
+echo -e "\n${COLOR}creating namespace and initial secrets${NC}"
 
-kubectl apply -k cluster/argocd
+kubectl apply -f cluster/argocd/argocd-ns.yaml
 
 kubectl create secret generic argocd-sync-secret -n argocd \
   --from-literal=git_username=username \
   --from-literal=git_token="$GITHUB_TOKEN" \
   --dry-run=client -o yaml | kubectl apply -f -
+
+echo -e "\n${COLOR}bootstrapping ArgoCD Core onto the cluster: $bootstrap_env ${NC}"
+
+kubectl apply -k cluster/argocd
 
 echo -e "\n${COLOR}waiting for the ArgoCD installation to be ready${NC}"
 echo -e "${COLOR}while not strictly necessary, this reduces the wait time for the initial cluster reconciliation to sync${NC}"
