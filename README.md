@@ -29,3 +29,6 @@ ArgoCD Application:
 Namespace Management:
 - Namespaces can be created by the ArgoCD Application by specifying 'CreateNamespace=true' in spec/syncPolicy/syncOptions
 - Labels and Annotations can be added to the automatically created namespace by through spec/syncPolicy/managedNamespaceMetadata
+
+[ArgoCD Vault Plugin](https://argocd-vault-plugin.readthedocs.io/en/stable/):
+- Used to post-render the result of helm-template or kustomize-build with the values of secrets retrieved from vault
