@@ -11,6 +11,9 @@ _default:
   just vault
   kubectl apply -k cluster/argocd
   just _secret
+  just _check
+  kubectl apply -f cluster/default-project.yaml
+  kubectl apply -f test/sample-secret.yaml -n argocd
 
 @demo:
   just podman

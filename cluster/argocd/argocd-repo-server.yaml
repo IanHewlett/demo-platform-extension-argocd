@@ -13,9 +13,6 @@ spec:
 
       # Each of the embedded YAMLs inside cmp-plugin ConfigMap will be mounted into it's respective plugin sidecar
       volumes:
-        - configMap:
-            name: cmp-plugin
-          name: cmp-plugin
         - name: custom-tools
           emptyDir: {}
 
