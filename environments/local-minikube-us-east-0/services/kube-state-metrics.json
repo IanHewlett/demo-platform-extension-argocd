@@ -1,0 +1,9 @@
+{
+  "name": "kube-state-metrics",
+  "helm_values": [
+    {
+      "key": "replicas",
+      "value": 2
+    }
+  ]
+}
