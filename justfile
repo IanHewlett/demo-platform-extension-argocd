@@ -13,7 +13,7 @@ _default:
   just _secret
   just _check
   kubectl apply -f cluster/default-project.yaml
-  kubectl apply -f test/e2e/argocd-vault-plugin/source/sample-secret.yaml -n argocd
+  kubectl apply -f test/e2e/argocd-vault-plugin/sample-secret.yaml -n argocd
 
 @demo:
   just podman
