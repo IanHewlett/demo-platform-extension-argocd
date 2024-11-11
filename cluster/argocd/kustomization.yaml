@@ -4,7 +4,8 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-  - github.com/argoproj/argo-cd/manifests/core-install?ref=v2.10.17
+  - https://github.com/argoproj/argo-cd//manifests/cluster-install?ref=v2.12.6
+  - cmp-plugin.yaml
 
 configMapGenerator:
   - behavior: merge
@@ -20,6 +21,11 @@ configMapGenerator:
     name: argocd-cm
 
 patches:
+  - path: argocd-repo-server.yaml
+    target:
+      kind: Deployment
+      name: argocd-repo-server
+
   - target:
       kind: Deployment
       name: argocd-redis

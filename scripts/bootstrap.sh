@@ -14,6 +14,8 @@ kubectl create secret generic argocd-sync-secret -n argocd \
   --from-literal=git_token="$GITHUB_TOKEN" \
   --dry-run=client -o yaml | kubectl apply -f -
 
+kubectl apply -f cluster/argocd/argocd-vault-plugin-credentials.yaml
+
 echo -e "\n${COLOR}bootstrapping ArgoCD Core onto the cluster: $bootstrap_env ${NC}"
 
 kubectl apply -k cluster/argocd
