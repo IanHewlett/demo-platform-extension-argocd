@@ -1,0 +1,9 @@
+{
+  "name": "metrics-server",
+  "helm_values": [
+    {
+      "key": "replicas",
+      "value": 2
+    }
+  ]
+}

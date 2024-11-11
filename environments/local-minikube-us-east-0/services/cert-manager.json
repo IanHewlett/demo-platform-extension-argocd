@@ -1,0 +1,17 @@
+{
+  "name": "cert-manager",
+  "helm_values": [
+    {
+      "key": "replicaCount",
+      "value": 2
+    },
+    {
+      "key": "cainjector.replicaCount",
+      "value": 2
+    },
+    {
+      "key": "webhook.replicaCount",
+      "value": 2
+    }
+  ]
+}
