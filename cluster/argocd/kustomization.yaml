@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-  - github.com/argoproj/argo-cd/manifests/core-install?ref=v2.12.6
+  - github.com/argoproj/argo-cd/manifests/core-install?ref=v2.7.9
 
 configMapGenerator:
   - behavior: merge
