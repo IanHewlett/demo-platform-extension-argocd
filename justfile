@@ -5,6 +5,13 @@ podman_mount_path := "/Users/ianhewlett:/Users/ianhewlett"
 _default:
   @just --list
 
+@test:
+  just podman
+  just minikube
+  just vault
+  kubectl apply -k cluster/argocd
+  just _secret
+
 @demo:
   just podman
   just minikube
