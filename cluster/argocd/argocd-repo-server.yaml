@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: argocd-repo-server
+
 spec:
   template:
     spec:
@@ -14,6 +15,7 @@ spec:
         - configMap:
             name: cmp-plugin
           name: cmp-plugin
+
         - name: custom-tools
           emptyDir: {}
 
@@ -21,15 +23,19 @@ spec:
       initContainers:
         - name: download-tools
           image: registry.access.redhat.com/ubi8
+
           env:
             - name: AVP_VERSION
               value: 1.18.0
+
           command: [sh, -c]
+
           args:
             - >-
               curl -L https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v$(AVP_VERSION)/argocd-vault-plugin_$(AVP_VERSION)_linux_arm64 -o argocd-vault-plugin &&
               chmod +x argocd-vault-plugin &&
               mv argocd-vault-plugin /custom-tools/
+
           volumeMounts:
             - mountPath: /custom-tools
               name: custom-tools
@@ -38,17 +44,22 @@ spec:
         - name: avp-helm
           command: [ /var/run/argocd/argocd-cmp-server ]
           image: quay.io/argoproj/argocd:v2.12.6
+
           securityContext:
             runAsNonRoot: true
             runAsUser: 999
+
           envFrom:
             - secretRef:
                 name: argocd-vault-plugin-credentials
+
           volumeMounts:
             - mountPath: /var/run/argocd
               name: var-files
+
             - mountPath: /home/argocd/cmp-server/plugins
               name: plugins
+
             - mountPath: /tmp
               name: tmp
 
@@ -66,17 +77,22 @@ spec:
         - name: avp-kustomize
           command: [ /var/run/argocd/argocd-cmp-server ]
           image: quay.io/argoproj/argocd:v2.12.6
+
           securityContext:
             runAsNonRoot: true
             runAsUser: 999
+
           envFrom:
             - secretRef:
                 name: argocd-vault-plugin-credentials
+
           volumeMounts:
             - mountPath: /var/run/argocd
               name: var-files
+
             - mountPath: /home/argocd/cmp-server/plugins
               name: plugins
+
             - mountPath: /tmp
               name: tmp
 
@@ -94,17 +110,22 @@ spec:
         - name: avp
           command: [ /var/run/argocd/argocd-cmp-server ]
           image: quay.io/argoproj/argocd:v2.12.6
+
           securityContext:
             runAsNonRoot: true
             runAsUser: 999
+
           envFrom:
             - secretRef:
                 name: argocd-vault-plugin-credentials
+
           volumeMounts:
             - mountPath: /var/run/argocd
               name: var-files
+
             - mountPath: /home/argocd/cmp-server/plugins
               name: plugins
+
             - mountPath: /tmp
               name: tmp
 
