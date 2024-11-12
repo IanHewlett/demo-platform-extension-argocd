@@ -5,3 +5,5 @@ vault kv put secret/svc/github \
   image_pull_token="$GITHUB_TOKEN"
 vault secrets enable -path=avp kv-v2
 vault kv put avp/test sample=secret
+vault secrets enable -path=test kv-v2
+vault kv put test/svc/vault vault_address="http://vault.vault.svc.cluster.local:8200"
