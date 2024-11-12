@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
   - ../../cluster
+  - cluster-secrets.yaml
 
 patches:
   - target:
