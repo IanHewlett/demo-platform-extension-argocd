@@ -18,6 +18,8 @@ Bootstrap Process:
 Useful commands:
 'kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A'
 'argocd admin dashboard -n argocd'
+'mkdir -p ./tmp && kustomize build cluster/argocd -o ./tmp'
+
 
 ArgoCD Application:
 - You can pass values to a helm chart through an Application in three ways:

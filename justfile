@@ -9,7 +9,10 @@ _default:
   just podman
   just minikube
   just vault
-  just argocd
+  ./scripts/bootstrap.sh local-minikube-us-east-0
+  ./scripts/ready.sh
+  ./scripts/test.sh
+  ./scripts/test-vault-plugin.sh
 
 @clean:
   minikube stop || true
@@ -31,31 +34,6 @@ _default:
         minikube start --driver=podman --container-runtime=cri-o)
     kubectl label nodes minikube "nodegroup"="management-nodes"
     kubectl label nodes minikube "node.kubernetes.io/role"="management"
-
-@argocd:
-  ./scripts/bootstrap.sh local-minikube-us-east-0
-  just _wait
-
-@_wait:
-  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
-  echo "waiting 5 seconds..." && sleep 5
-  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
-  echo "waiting 5 seconds..." && sleep 5
-  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
-  echo "waiting 5 seconds..." && sleep 5
-  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
-  echo "waiting 5 seconds..." && sleep 5
-  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
-  echo "waiting 10 seconds..." && sleep 10
-  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
-  echo "waiting 10 seconds..." && sleep 10
-  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
-  echo "waiting 10 seconds..." && sleep 10
-  kubectl get Application -A && kubectl get ApplicationSet -A && kubectl get AppProject -A
-
-extract-argocd-core-manifests:
-  mkdir -p ./tmp
-  kustomize build cluster/argocd -o ./tmp
 
 vault vault_namespace="vault": && vault-auth vault-secrets
   helm repo add hashicorp https://helm.releases.hashicorp.com && helm repo update > /dev/null
@@ -79,8 +57,3 @@ vault-secrets vault_namespace="vault":
   envsubst "$(printf '${%s} ' $(env | cut -d'=' -f1))" < ./scripts/vault-secrets.sh > tmp.sh
   kubectl -n {{vault_namespace}} exec -it vault-0 -- /bin/sh -c  "`cat tmp.sh`"
   rm -f tmp.sh
-
-test-vault-plugin:
-  kubectl apply -f test/e2e/argocd-vault-plugin/sample-secret.yaml
-  # get application; is healthy?
-  # get secret; has value?
