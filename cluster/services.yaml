@@ -45,7 +45,7 @@ spec:
         targetRevision: '{{.source_version}}'
 
         plugin:
-          name: argocd-vault-plugin
+          name: argocd-vault-plugin-kustomize
           env:
             - name: VAULT_NAMESPACE
               value: admin
