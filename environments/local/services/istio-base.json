@@ -4,5 +4,9 @@
   "source_url": "https://github.com/IanHewlett/demo-platform-service-istio-system.git",
   "source_path": "release/istio-base",
   "source_version": "main",
-  "create_namespace": true
+  "create_namespace": true,
+  "namespace_labels": [
+    "test-lavel-role: local",
+    "topology.istio.io/network: local-minikube"
+  ]
 }
