@@ -1,6 +1,0 @@
-{
-  "name": "test-secret",
-  "namespace_labels": [
-    "test-level-instance: local-minikube-us-east-0"
-  ]
-}
