@@ -85,6 +85,18 @@ spec:
                     - name: {{ $param.key }}
                       value: '{{ $param.value }}'
                   {{- end }}
+      {{- if .create_namespace }}
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        {{- if .namespace_labels }}
+        managedNamespaceMetadata:
+          labels:
+            {{- range $labelKeyPair := .namespace_labels }}
+            {{ $labelKeyPair }}
+            {{- end }}
+        {{- end }}
+    {{- end }}
     {{- end }}
 
     {{- if .kustomization_values }}
