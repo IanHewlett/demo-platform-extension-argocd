@@ -5,6 +5,9 @@
   "source_path": "overlays/local",
   "source_version": "main",
   "create_namespace": true,
+  "namespace_labels": [
+    "test-level-role: local"
+  ],
   "helm_values": [
     {
       "key": "replicaCount",
