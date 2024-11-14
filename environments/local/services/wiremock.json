@@ -8,11 +8,5 @@
   "namespace_labels": [
     "istio-injection: enabled",
     "opa-istio-injection: enabled"
-  ],
-  "helm_values": [
-    {
-      "key": "replicaCount",
-      "value": 2
-    }
   ]
 }

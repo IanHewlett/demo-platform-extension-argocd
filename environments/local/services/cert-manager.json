@@ -4,5 +4,11 @@
   "source_url": "https://github.com/IanHewlett/demo-platform-service-cert-manager.git",
   "source_path": "overlays/local",
   "source_version": "main",
-  "create_namespace": true
+  "create_namespace": true,
+  "helm_values": [
+    {
+      "key": "replicaCount",
+      "value": 2
+    }
+  ]
 }
