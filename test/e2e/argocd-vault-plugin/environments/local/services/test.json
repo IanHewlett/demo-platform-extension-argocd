@@ -1,0 +1,11 @@
+{
+  "name": "test-secret",
+  "namespace": "test-secret",
+  "source_url": "https://github.com/IanHewlett/demo-platform-extension-argocd.git",
+  "source_path": "test/e2e/argocd-vault-plugin/source",
+  "source_version": "main",
+  "create_namespace": true,
+  "namespace_labels": [
+    "test-lavel-role: local"
+  ]
+}
