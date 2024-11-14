@@ -1,7 +1,8 @@
 {
   "name": "test-secret",
   "namespace_labels": [
-    "test-lavel-instance: local-minikube-us-east-0"
+    "test-level-instance: local-minikube-us-east-0",
+    "test-secret: <path:avp/data/test#sample>"
   ],
   "kustomization_values": [
     {
