@@ -6,12 +6,6 @@
   "source_version": "main",
   "create_namespace": true,
   "namespace_labels": [
-    "test-level-role: local"
-  ],
-  "helm_values": [
-    {
-      "key": "replicaCount",
-      "value": 2
-    }
+    "test-level-role: <path:avp/data/test#sample>"
   ]
 }
