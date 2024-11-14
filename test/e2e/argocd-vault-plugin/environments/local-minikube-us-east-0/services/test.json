@@ -2,5 +2,25 @@
   "name": "test-secret",
   "namespace_labels": [
     "test-level-instance: local-minikube-us-east-0"
+  ],
+  "kustomization_values": [
+    {
+      "kind": "Secret",
+      "name": "example-secret",
+      "path": "/stringData/test",
+      "value": "test-val"
+    },
+    {
+      "kind": "Secret",
+      "name": "example-secret",
+      "path": "/stringData/test2",
+      "value": <path:avp/data/test#sample>
+    },
+    {
+      "kind": "Secret",
+      "name": "example-secret",
+      "path": "/stringData/test3",
+      "value": "<path:avp/data/test#sample>"
+    }
   ]
 }

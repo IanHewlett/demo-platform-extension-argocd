@@ -6,6 +6,6 @@
   "source_version": "main",
   "create_namespace": true,
   "namespace_labels": [
-    "test-lavel-role: local"
+    "test-level-role: local"
   ]
 }
