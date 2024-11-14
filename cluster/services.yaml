@@ -55,20 +55,20 @@ spec:
           selfHeal: true
 
   templatePatch: |
-    {{- if or .helm_values .create_namespace .kustomization_values }}
+    {{- if or .helm_chart_values .helm_application_values .kustomization_values .create_namespace }}
     spec:
 
       {{- if .helm_chart_values }}
       source:
         helm:
           parameters:
-          {{- range $param:= .helm_values }}
+          {{- range $param:= .helm_chart_values }}
             - name: {{ $param.key }}
               value: '{{ $param.value }}'
           {{- end }}
       {{- end }}
 
-      {{- if .helm_values }}
+      {{- if .helm_application_values }}
       source:
         kustomize:
           patches:
@@ -79,7 +79,7 @@ spec:
                 - op: add
                   path: /spec/sources/0/helm/parameters
                   value:
-                  {{- range $param:= .helm_values }}
+                  {{- range $param:= .helm_application_values }}
                     - name: {{ $param.key }}
                       value: '{{ $param.value }}'
                   {{- end }}

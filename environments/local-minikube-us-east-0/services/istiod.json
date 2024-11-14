@@ -1,6 +1,6 @@
 {
   "name": "istiod",
-  "helm_values": [
+  "helm_application_values": [
     {
       "key": "global.network",
       "value": "local-minikube-us-east-0"

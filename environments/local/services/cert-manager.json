@@ -8,7 +8,7 @@
   "namespace_labels": [
     "test-level-role: local"
   ],
-  "helm_values": [
+  "helm_application_values": [
     {
       "key": "replicaCount",
       "value": 2
