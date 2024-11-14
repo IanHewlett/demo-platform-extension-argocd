@@ -60,19 +60,12 @@ spec:
 
       {{- if .helm_chart_values }}
       source:
-        kustomize:
-          patches:
-            - target:
-                kind: Application
-                name: {{ .name }}
-              patch: |
-                - op: add
-                  path: /spec/source/helm/parameters
-                  value:
-                  {{- range $param:= .helm_values }}
-                    - name: {{ $param.key }}
-                      value: '{{ $param.value }}'
-                  {{- end }}
+        helm:
+          parameters:
+          {{- range $param:= .helm_values }}
+            - name: {{ $param.key }}
+              value: '{{ $param.value }}'
+          {{- end }}
       {{- end }}
 
       {{- if .helm_values }}
