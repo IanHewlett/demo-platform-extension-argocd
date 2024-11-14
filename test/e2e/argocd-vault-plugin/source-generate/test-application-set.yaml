@@ -17,14 +17,14 @@ spec:
         generators:
           - git:
               files:
-                - path: test/e2e/argocd-vault-plugin/environments/${ROLE}/services/*.json
+                - path: test/e2e/argocd-vault-plugin/environments/local/services/*.json
               repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
               requeueAfterSeconds: 20
               revision: ""
 
           - git:
               files:
-                - path: test/e2e/argocd-vault-plugin/environments/${INSTANCE}/services/*.json
+                - path: test/e2e/argocd-vault-plugin/environments/local-minikube-us-east-0/services/*.json
               repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
               requeueAfterSeconds: 20
               revision: ""
