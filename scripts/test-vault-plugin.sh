@@ -10,7 +10,7 @@ while [[ $(kubectl get application -n argocd sample-secret -o 'jsonpath={.status
   do echo "not ready" && sleep 1; done
 
 echo "check if rendered secret matches vault value"
-if [[ "$(kubectl get secret -n argocd example-secret -o jsonpath='{.data.sample-secret}' | base64 --decode)" == "secret" ]]; then
+if [[ "$(kubectl get secret -n test-secret example-secret -o jsonpath='{.data.sample-secret}' | base64 --decode)" == "secret" ]]; then
   echo "they match"
 else
   echo "they do not match"
