@@ -1,7 +1,6 @@
 {
   "name": "test-secret",
   "namespace_labels": [
-    "test-level-instance: local-minikube-us-east-0",
-    "test-secret: "<path:avp/data/test#sample>""
+    "test-level-instance: local-minikube-us-east-0"
   ]
 }
