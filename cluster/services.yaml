@@ -55,8 +55,9 @@ spec:
           selfHeal: true
 
   templatePatch: |
-    {{- if or .helm_values .create_namespace }}
+    {{- if or .helm_values .create_namespace .kustomization_values }}
     spec:
+
       {{- if .helm_values }}
       source:
         kustomize:
@@ -73,22 +74,8 @@ spec:
                       value: '{{ $param.value }}'
                   {{- end }}
       {{- end }}
-      {{- if .create_namespace }}
-      syncPolicy:
-        syncOptions:
-          - CreateNamespace=true
-        {{- if .namespace_labels }}
-        managedNamespaceMetadata:
-          labels:
-            {{- range $labelKeyPair := .namespace_labels }}
-            {{ $labelKeyPair }}
-            {{- end }}
-        {{- end }}
-    {{- end }}
-    {{- end }}
 
-    {{- if .kustomization_values }}
-    spec:
+      {{- if .kustomization_values }}
       source:
         kustomize:
           patches:
@@ -101,4 +88,19 @@ spec:
                   path: {{ $kustomization.path }}
                   value: {{ $kustomization.value }}
           {{- end }}
+      {{- end }}
+
+      {{- if .create_namespace }}
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        {{- if .namespace_labels }}
+        managedNamespaceMetadata:
+          labels:
+            {{- range $labelKeyPair := .namespace_labels }}
+            {{ $labelKeyPair }}
+            {{- end }}
+        {{- end }}
+      {{- end }}
+
     {{- end }}
