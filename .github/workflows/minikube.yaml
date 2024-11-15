@@ -24,5 +24,8 @@ jobs:
       - name: bootstrap argocd
         run: ./scripts/bootstrap.sh local-minikube-us-east-0
 
+      - name: wait for argocd core installation to be ready
+        run: ./scripts/ready.sh
+
       - name: Try the cluster!
         run: kubectl get pods -A
