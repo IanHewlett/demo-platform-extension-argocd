@@ -1,0 +1,15 @@
+name: Minikube
+on:
+  - push
+  - pull_request
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    name: build discover and deploy
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - name: Start minikube
+        uses: medyagh/setup-minikube@latest
+        # now you can run kubectl to see the pods in the cluster
+      - name: Try the cluster!
+        run: kubectl get pods -A
