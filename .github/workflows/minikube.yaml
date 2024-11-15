@@ -21,5 +21,8 @@ jobs:
       - name: install vault
         run: just vault
 
+      - name: bootstrap argocd
+        run: ./scripts/bootstrap.sh local-minikube-us-east-0
+
       - name: Try the cluster!
         run: kubectl get pods -A
