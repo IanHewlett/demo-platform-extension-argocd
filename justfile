@@ -10,8 +10,8 @@ _default:
   just minikube
   just vault
   ./scripts/bootstrap.sh local-minikube-us-east-0
-  ./scripts/ready.sh
   ./scripts/test.sh
+  ./scripts/ready.sh
   ./scripts/test-vault-plugin.sh
 
 @clean:
