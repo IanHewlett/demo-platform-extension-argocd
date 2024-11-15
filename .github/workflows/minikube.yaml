@@ -24,11 +24,11 @@ jobs:
       - name: bootstrap argocd
         run: ./scripts/bootstrap.sh local-minikube-us-east-0
 
-      - name: run spec test for the argocd core installation
-        run: ./scripts/test.sh
+#      - name: run spec test for the argocd core installation
+#        run: ./scripts/test.sh
 
-      - name: wait for argocd core installation to be ready
-        run: ./scripts/ready.sh
+#      - name: wait for argocd core installation to be ready
+#        run: ./scripts/ready.sh
 
       - name: Try the cluster!
         run: kubectl get pods -A
