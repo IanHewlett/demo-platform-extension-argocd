@@ -12,7 +12,7 @@
   "helm_chart_values": [
     {
       "key": "replicaCount",
-      "value": 2
+      "value": 3
     }
   ]
 }
