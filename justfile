@@ -5,11 +5,11 @@ podman_mount_path := "/Users/ianhewlett:/Users/ianhewlett"
 _default:
   @just --list
 
-@demo:
+@demo role instance:
   just podman
   just minikube
-  just vault
-  ./scripts/bootstrap.sh local local-minikube-us-east-0
+  just vault {{instance}}
+  ./scripts/bootstrap.sh {{role}} {{instance}}
   ./scripts/test.sh
   ./scripts/ready.sh
   ./scripts/test-vault-plugin.sh

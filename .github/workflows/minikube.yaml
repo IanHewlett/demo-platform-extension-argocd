@@ -19,7 +19,7 @@ jobs:
         # now you can run kubectl to see the pods in the cluster
 
       - name: install vault
-        run: just vault
+        run: just vault github-minikube-us-east-0
 
       - name: bootstrap argocd
         run: ./scripts/bootstrap.sh github github-minikube-us-east-0
