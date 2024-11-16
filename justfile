@@ -46,14 +46,15 @@ vault cluster_name vault_namespace="vault": && (vault-auth cluster_name) vault-s
 
 vault-auth cluster_name vault_namespace="vault":
   while [[ $(kubectl get pods -n {{vault_namespace}} vault-0 -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; \
-   do echo "waiting for pod" && sleep 1; done
-  CLUSTER_NAME={{cluster_name}} $(envsubst "$(printf '${%s} ' $(env | cut -d'=' -f1))" < ./scripts/vault-auth.sh > tmp.sh)
+    do echo "waiting for pod" && sleep 1; done
+  export CLUSTER_NAME={{cluster_name}} && \
+    envsubst "$(printf '${%s} ' $(env | cut -d'=' -f1))" < ./scripts/vault-auth.sh > tmp.sh
   kubectl -n {{vault_namespace}} exec -it vault-0 -- /bin/sh -c  "`cat tmp.sh`"
   rm -f tmp.sh
 
 vault-secrets vault_namespace="vault":
   while [[ $(kubectl get pods -n {{vault_namespace}} vault-0 -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; \
-   do echo "waiting for pod" && sleep 1; done
+    do echo "waiting for pod" && sleep 1; done
   envsubst "$(printf '${%s} ' $(env | cut -d'=' -f1))" < ./scripts/vault-secrets.sh > tmp.sh
   kubectl -n {{vault_namespace}} exec -it vault-0 -- /bin/sh -c  "`cat tmp.sh`"
   rm -f tmp.sh
