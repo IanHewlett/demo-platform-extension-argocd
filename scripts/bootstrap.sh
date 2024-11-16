@@ -15,7 +15,7 @@ kubectl apply -f cluster/argocd/argocd-ns.yaml
 
 kubectl create secret generic argocd-sync-secret -n argocd \
   --from-literal=git_username=username \
-  --from-literal=git_token="$GITHUB_TOKEN" \
+  --from-literal=git_token="$GH_PAT" \
   --dry-run=client -o yaml | kubectl apply -f -
 
 kubectl create secret generic argocd-vault-plugin-credentials -n argocd \
