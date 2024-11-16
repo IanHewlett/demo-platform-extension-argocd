@@ -34,7 +34,6 @@ kubectl apply -k cluster/argocd
 
 ########################################################################################################################
 echo -e "\n${COLOR}waiting for the ArgoCD installation to be ready${NC}"
-echo -e "${COLOR}while not strictly necessary, this reduces the wait time for the initial cluster reconciliation to sync${NC}"
 ########################################################################################################################
 
 while [[ $(kubectl get pods -n argocd -l 'app.kubernetes.io/name=argocd-applicationset-controller' -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; \
@@ -54,7 +53,6 @@ kubectl get pods -n argocd
 
 ########################################################################################################################
 echo -e "\n${COLOR}applying the initial cluster sync${NC}"
-echo -e "${COLOR}this applies the entire environment kustomization for convenience, but you may apply just cluster.yaml to see it automatically sync the rest of the environment${NC}"
 ########################################################################################################################
 
 kubectl apply -k environments/"$bootstrap_env"/"$bootstrap_cluster"
