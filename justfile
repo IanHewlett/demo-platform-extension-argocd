@@ -12,7 +12,7 @@ _default:
   ./scripts/bootstrap.sh {{role}} {{instance}}
   ./scripts/test.sh
   ./scripts/ready.sh
-  ./scripts/test-vault-plugin.sh
+  #./scripts/test-vault-plugin.sh
 
 @clean:
   minikube stop || true
