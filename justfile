@@ -35,7 +35,7 @@ _default:
     kubectl label nodes minikube "nodegroup"="management-nodes"
     kubectl label nodes minikube "node.kubernetes.io/role"="management"
 
-vault vault_namespace="vault": && vault-auth vault-secrets
+vault cluster_name vault_namespace="vault": && (vault-auth cluster_name) vault-secrets
   helm repo add hashicorp https://helm.releases.hashicorp.com && helm repo update > /dev/null
   kubectl create namespace {{vault_namespace}} --dry-run=client -o yaml | kubectl apply -f -
   helm upgrade -i vault "hashicorp/vault" -n {{vault_namespace}} \
@@ -44,10 +44,10 @@ vault vault_namespace="vault": && vault-auth vault-secrets
     --set "injector.image.repository=docker.io/hashicorp/vault-k8s" \
     --wait
 
-vault-auth vault_namespace="vault":
+vault-auth cluster_name vault_namespace="vault":
   while [[ $(kubectl get pods -n {{vault_namespace}} vault-0 -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; \
    do echo "waiting for pod" && sleep 1; done
-  envsubst "$(printf '${%s} ' $(env | cut -d'=' -f1))" < ./scripts/vault-auth.sh > tmp.sh
+  CLUSTER_NAME={{cluster_name}} $(envsubst "$(printf '${%s} ' $(env | cut -d'=' -f1))" < ./scripts/vault-auth.sh > tmp.sh)
   kubectl -n {{vault_namespace}} exec -it vault-0 -- /bin/sh -c  "`cat tmp.sh`"
   rm -f tmp.sh
 
