@@ -18,6 +18,11 @@ jobs:
         uses: medyagh/setup-minikube@latest
         # now you can run kubectl to see the pods in the cluster
 
+      - name: label nodes
+        run: |
+          kubectl label nodes minikube "nodegroup"="management-nodes"
+          kubectl label nodes minikube "node.kubernetes.io/role"="management"
+
       - name: install vault
         run: just vault github-minikube-us-east-0
 
