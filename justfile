@@ -9,7 +9,7 @@ _default:
   just podman
   just minikube
   just vault
-  ./scripts/bootstrap.sh local-minikube-us-east-0
+  ./scripts/bootstrap.sh local local-minikube-us-east-0
   ./scripts/test.sh
   ./scripts/ready.sh
   ./scripts/test-vault-plugin.sh

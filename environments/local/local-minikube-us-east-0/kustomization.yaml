@@ -3,7 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../../cluster
+  - ../../../cluster
 #  - cluster-secrets.yaml
 
 patches:
@@ -14,7 +14,7 @@ patches:
       - op: add
         path: /spec/source/path
         value:
-          environments/local-minikube-us-east-0
+          environments/local/local-minikube-us-east-0
 
   - target:
       kind: ApplicationSet
@@ -27,4 +27,4 @@ patches:
       - op: add
         path: /spec/generators/0/merge/generators/1/git/files/0/path
         value:
-          environments/local-minikube-us-east-0/services/*.json
+          environments/local/local-minikube-us-east-0/services/*.json

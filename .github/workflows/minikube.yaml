@@ -22,7 +22,7 @@ jobs:
         run: just vault
 
       - name: bootstrap argocd
-        run: ./scripts/bootstrap.sh local-minikube-us-east-0
+        run: ./scripts/bootstrap.sh github github-minikube-us-east-0
 
 #      - name: run spec test for the argocd core installation
 #        run: ./scripts/test.sh
