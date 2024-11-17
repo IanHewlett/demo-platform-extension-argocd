@@ -1,0 +1,7 @@
+{
+  "name": "grafana",
+  "namespace": "istio-system",
+  "source_url": "https://github.com/IanHewlett/demo-platform-service-grafana.git",
+  "source_path": "release",
+  "source_version": "main"
+}
