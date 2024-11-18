@@ -1,0 +1,9 @@
+{
+  "name": "cert-manager-istio-csr",
+  "helm_application_values": [
+    {
+      "key": "app.server.clusterID",
+      "value": "local-minikube-us-east-0"
+    }
+  ]
+}

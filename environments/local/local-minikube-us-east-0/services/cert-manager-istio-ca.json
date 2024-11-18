@@ -1,0 +1,17 @@
+{
+  "name": "cert-manager-istio-ca",
+  "helm_chart_values": [
+    {
+      "key": "role",
+      "value": "local"
+    },
+    {
+      "key": "cluster_name",
+      "value": "local-minikube-us-east-0"
+    },
+    {
+      "key": "vault_addr",
+      "value": "http://vault.vault.svc.cluster.local:8200"
+    }
+  ]
+}
