@@ -12,7 +12,7 @@ _default:
   ./scripts/bootstrap.sh {{role}} {{instance}}
   ./scripts/test.sh
   ./scripts/ready.sh
-  #./scripts/test-vault-plugin.sh
+  ./scripts/test-vault-plugin.sh
 
 @clean:
   minikube stop || true
@@ -35,7 +35,7 @@ _default:
     kubectl label nodes minikube "nodegroup"="management-nodes"
     kubectl label nodes minikube "node.kubernetes.io/role"="management"
 
-vault cluster_name vault_namespace="vault": && (vault-auth cluster_name) vault-secrets
+vault cluster_name vault_namespace="vault": && (vault-auth cluster_name) vault-secrets vault-pki
   helm repo add hashicorp https://helm.releases.hashicorp.com && helm repo update > /dev/null
   kubectl create namespace {{vault_namespace}} --dry-run=client -o yaml | kubectl apply -f -
   helm upgrade -i vault "hashicorp/vault" -n {{vault_namespace}} \
@@ -58,3 +58,10 @@ vault-secrets vault_namespace="vault":
   envsubst "$(printf '${%s} ' $(env | cut -d'=' -f1))" < ./scripts/vault-secrets.sh > tmp.sh
   kubectl -n {{vault_namespace}} exec -it vault-0 -- /bin/sh -c  "`cat tmp.sh`"
   rm -f tmp.sh
+
+vault-pki vault_namespace="vault":
+  #!/usr/bin/env bash
+  set -eo pipefail
+  kubectl port-forward -n vault vault-0 8200:8200 &
+  pid=$!
+  ./scripts/vault-pki.sh
