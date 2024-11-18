@@ -1,9 +1,0 @@
-{
-  "name": "kube-state-metrics",
-  "helm_application_values": [
-    {
-      "key": "replicas",
-      "value": 2
-    }
-  ]
-}

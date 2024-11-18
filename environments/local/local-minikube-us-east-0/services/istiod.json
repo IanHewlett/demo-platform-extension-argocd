@@ -4,10 +4,6 @@
     {
       "key": "global.network",
       "value": "local-minikube-us-east-0"
-    },
-    {
-      "key": "pilot.replicaCount",
-      "value": 2
     }
   ]
 }

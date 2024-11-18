@@ -1,9 +1,0 @@
-{
-  "name": "wiremock",
-  "helm_chart_values": [
-    {
-      "key": "replicaCount",
-      "value": 2
-    }
-  ]
-}
