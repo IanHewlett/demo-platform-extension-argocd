@@ -2,7 +2,7 @@
   "name": "opentelemetry-operator",
   "namespace": "opentelemetry",
   "source_url": "https://github.com/IanHewlett/demo-platform-service-opentelemetry.git",
-  "source_path": "release/opentelemetry-operator",
+  "source_path": "environments/local/opentelemetry-operator",
   "source_version": "main",
   "create_namespace": true
 }
