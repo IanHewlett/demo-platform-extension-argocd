@@ -2,6 +2,6 @@
   "name": "metrics-server",
   "namespace": "kube-system",
   "source_url": "https://github.com/IanHewlett/demo-platform-service-metrics-server.git",
-  "source_path": "overlays/local",
+  "source_path": "environments/local",
   "source_version": "main"
 }
