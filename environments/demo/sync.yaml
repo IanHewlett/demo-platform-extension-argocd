@@ -1,0 +1,149 @@
+# yamllint disable rule:line-length
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: default
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    - namespace: '*'
+      server: '*'
+  sourceRepos:
+    - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
+    path: environments/demo
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - allowEmpty=true
+
+  ignoreDifferences:
+    - group: argoproj.io
+      jsonPointers:
+        - /status
+      kind: Application
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: services
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  goTemplate: true
+  generators:
+    - merge:
+        mergeKeys:
+          - name
+        generators:
+          - git:
+              files:
+                - path: environments/${ROLE}/cluster/services/*.json
+              repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
+              requeueAfterSeconds: 20
+              revision: ""
+
+          - git:
+              files:
+                - path: environments/${ROLE}/instances/${INSTANCE}/services/*.json
+              repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
+              requeueAfterSeconds: 20
+              revision: ""
+
+  syncPolicy:
+    preserveResourcesOnDeletion: false
+
+  template:
+    metadata:
+      name: '{{.name}}-release'
+      namespace: argocd
+
+    spec:
+      project: default
+
+      source:
+        repoURL: '{{.source_url}}'
+        path: '{{.source_path}}'
+        targetRevision: '{{.source_version}}'
+
+      destination:
+        server: "https://kubernetes.default.svc"
+        namespace: '{{.namespace}}'
+
+      syncPolicy:
+        automated:
+          allowEmpty: true
+          selfHeal: true
+
+  templatePatch: |
+    {{- if or .helm_chart_values .helm_application_values .create_namespace }}
+    spec:
+
+      {{- if .helm_chart_values }}
+      source:
+        helm:
+          parameters:
+          {{- range $param:= .helm_chart_values }}
+            - name: {{ $param.key }}
+              value: '{{ $param.value }}'
+          {{- end }}
+      {{- end }}
+
+      {{- if .helm_application_values }}
+      source:
+        kustomize:
+          patches:
+            - target:
+                kind: Application
+                name: {{ .name }}
+              patch: |
+                - op: add
+                  path: /spec/sources/0/helm/parameters
+                  value:
+                  {{- range $param:= .helm_application_values }}
+                    - name: {{ $param.key }}
+                      value: '{{ $param.value }}'
+                  {{- end }}
+      {{- end }}
+
+      {{- if .create_namespace }}
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        {{- if .namespace_labels }}
+        managedNamespaceMetadata:
+          labels:
+            {{- range $labelKeyPair := .namespace_labels }}
+            {{ $labelKeyPair }}
+            {{- end }}
+        {{- end }}
+      {{- end }}
+
+    {{- end }}

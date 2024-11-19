@@ -1,0 +1,30 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: argocd
+
+resources:
+  - argocd-ns.yaml
+  - https://github.com/argoproj/argo-cd/manifests/core-install?ref=v2.12.6
+
+configMapGenerator:
+  - behavior: merge
+    literals:
+      - |
+        repository.credentials=- passwordSecret:
+            key: git_token
+            name: argocd-sync-secret
+          url: https://github.com/
+          usernameSecret:
+            key: git_username
+            name: argocd-sync-secret
+    name: argocd-cm
+
+patches:
+  - target:
+      kind: Deployment
+      name: argocd-redis
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: docker.io/redis:7.0.15-alpine

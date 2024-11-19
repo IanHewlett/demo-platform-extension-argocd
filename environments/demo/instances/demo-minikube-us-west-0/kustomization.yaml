@@ -1,0 +1,29 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../..
+
+patches:
+  - target:
+      kind: Application
+      name: cluster
+    patch: |
+      - op: add
+        path: /spec/source/path
+        value:
+          environments/demo/instances/demo-minikube-us-west-0
+
+  - target:
+      kind: ApplicationSet
+      name: services
+    patch: |
+      - op: add
+        path: /spec/generators/0/merge/generators/0/git/files/0/path
+        value:
+          environments/demo/services/*.json
+      - op: add
+        path: /spec/generators/0/merge/generators/1/git/files/0/path
+        value:
+          environments/demo/instances/demo-minikube-us-west-0/services/*.json
