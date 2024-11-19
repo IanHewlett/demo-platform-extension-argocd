@@ -11,16 +11,12 @@ metadata:
 spec:
   goTemplate: true
   generators:
-    - merge:
-        mergeKeys:
-          - name
-        generators:
-          - git:
-              files:
-                - path: environments/test/services/*.json
-              repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
-              requeueAfterSeconds: 20
-              revision: ""
+    - git:
+        files:
+          - path: environments/test/services/*.json
+        repoURL: https://github.com/IanHewlett/demo-platform-extension-argocd.git
+        requeueAfterSeconds: 20
+        revision: ""
 
   syncPolicy:
     preserveResourcesOnDeletion: false
@@ -48,7 +44,7 @@ spec:
           selfHeal: true
 
   templatePatch: |
-    {{- if or .helm_chart_values .helm_application_values .kustomization_values .create_namespace }}
+    {{- if or .helm_chart_values .helm_application_values .create_namespace }}
     spec:
 
       {{- if .helm_chart_values }}
