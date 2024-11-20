@@ -13,7 +13,7 @@ patches:
       - op: add
         path: /spec/source/path
         value:
-          environments/demo/instances/demo-minikube-us-west-0
+          environments/demo/clusters/demo-minikube-us-west-0
 
   - target:
       kind: ApplicationSet
@@ -22,8 +22,8 @@ patches:
       - op: add
         path: /spec/generators/0/merge/generators/0/git/files/0/path
         value:
-          environments/demo/services/*.json
+          environments/demo/mesh/services/*.json
       - op: add
         path: /spec/generators/0/merge/generators/1/git/files/0/path
         value:
-          environments/demo/instances/demo-minikube-us-west-0/services/*.json
+          environments/demo/clusters/demo-minikube-us-west-0/services/*.json
