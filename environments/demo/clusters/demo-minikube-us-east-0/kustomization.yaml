@@ -8,7 +8,7 @@ resources:
 patches:
   - target:
       kind: Application
-      name: cluster
+      name: sync
     patch: |
       - op: add
         path: /spec/source/path
