@@ -35,7 +35,7 @@ _default:
     kubectl label nodes minikube "nodegroup"="management-nodes"
     kubectl label nodes minikube "node.kubernetes.io/role"="management"
 
-vault cluster_name vault_namespace="vault": && (vault-auth cluster_name) vault-secrets vault-pki
+vault cluster_name vault_namespace="vault": && (vault-auth cluster_name) vault-secrets vault-pki vault-transit
   helm repo add hashicorp https://helm.releases.hashicorp.com && helm repo update > /dev/null
   kubectl create namespace {{vault_namespace}} --dry-run=client -o yaml | kubectl apply -f -
   helm upgrade -i vault "hashicorp/vault" -n {{vault_namespace}} \
@@ -64,4 +64,11 @@ vault-pki vault_namespace="vault":
   set -eo pipefail
   kubectl port-forward -n vault vault-0 8200:8200 &
   pid=$!
-  ./scripts/vault-pki.sh
+  ./scripts/vault-pki.sh demo demo-minikube-us-east-0
+
+vault-transit vault_namespace="vault":
+  #!/usr/bin/env bash
+  set -eo pipefail
+  kubectl port-forward -n vault vault-0 8200:8200 &
+  pid=$!
+  ./scripts/vault-transit.sh
